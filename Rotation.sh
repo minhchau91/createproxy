@@ -107,7 +107,7 @@ rm -fv /etc/rc.local
 cat >>/etc/rc.local <<EOF
 touch /var/lock/subsys/local
 systemctl start NetworkManager.service
-ifup ${interface}
+/sbin/ifup ${interface}
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
