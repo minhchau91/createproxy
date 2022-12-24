@@ -60,13 +60,13 @@ gen_data() {
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "|" '{print "iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
+    $(awk -F "|" '{print "/sbin/iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
 EOF
 }
 
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7$8}' ${WORKDATA})
+$(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7$8}' ${WORKDATA})
 EOF
 }
 
