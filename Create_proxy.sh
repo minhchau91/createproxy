@@ -124,13 +124,14 @@ while true; do
     esac
 done
 
-read -p "Please input start port :" FIRST_PORT
-read -p "Please input start port :" LAST_PORT
-
+#read -p "Please input start port :" FIRST_PORT
+#read -p "Please input start port :" LAST_PORT
+FIRST_PORT=40000
+LAST_PORT=40199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
-${IP6}|${Prefix}|${User}|${Pass}|${interface}|${Auth}|${FIRST_PORT}|${LAST_PORT}
+${IP6}|${Prefix}|${User}|${Pass}|${interface}|${Auth}
 EOF
 
 
