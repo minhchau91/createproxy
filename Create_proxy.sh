@@ -166,4 +166,5 @@ chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
