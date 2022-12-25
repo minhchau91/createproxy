@@ -107,11 +107,11 @@ mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-interface=eth0
+interface=eno1
 
-Auth=none
-User=minhchau
-Pass=minhchau@123
+Auth=strong
+User=nguyenhoan
+Pass=nguyenhoan@123
 Prefix=/64
 
 FIRST_PORT=40000
