@@ -107,15 +107,15 @@ mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-interface=eno1
+interface=eth0
 
 Auth=strong
-User=nguyenhoan
-Pass=nguyenhoan@123
+User=nguyennam
+Pass=nguyennam@123
 Prefix=/64
 
 FIRST_PORT=30000
-LAST_PORT=30999
+LAST_PORT=30099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -153,9 +153,9 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh"
 chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 #day - time
-59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-#*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
