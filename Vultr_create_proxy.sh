@@ -110,12 +110,12 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 interface=eth0
 
 Auth=strong
-User=nguyennam
-Pass=nguyennam@123
+User=levanthanh
+Pass=levanthanh
 Prefix=/64
 
-FIRST_PORT=30000
-LAST_PORT=30099
+FIRST_PORT=40000
+LAST_PORT=40199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
