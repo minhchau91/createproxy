@@ -126,13 +126,13 @@ interface=eth0
 #    esac
 #done
 Auth=strong
-User=levanthanh
-Pass=levanthanh
+User=theminh
+Pass=theminh@123
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=40000
-LAST_PORT=40149
+LAST_PORT=40199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -172,7 +172,7 @@ cat >>/var/spool/cron/root<<EOF
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
