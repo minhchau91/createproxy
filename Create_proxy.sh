@@ -125,14 +125,14 @@ interface=eth0
 #        * ) echo "Please answer yes or no.";;
 #    esac
 #done
-Auth=none
-User=levanthanh
-Pass=levanthanh
+Auth=strong
+User=mcproxy
+Pass=mc03t01n2023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=40000
-LAST_PORT=40099
+LAST_PORT=40149
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
