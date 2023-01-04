@@ -127,7 +127,7 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=mc04t01n2023
+Pass=proxy04d01t23y
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
