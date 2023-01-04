@@ -115,7 +115,7 @@ Pass=proxy04d01t23y
 Prefix=/64
 
 FIRST_PORT=40000
-LAST_PORT=40299
+LAST_PORT=40064
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
