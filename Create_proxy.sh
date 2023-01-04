@@ -110,7 +110,7 @@ checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 echo "Detected your ipv4: $IP4" 
 echo "Detected your ipv6: $checkIP6" 
 #read -p "What is your ipv6 prefix? (exp: /56, /64): " Prefix
-Prefix=/56
+Prefix=/64
 read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
@@ -127,12 +127,12 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=mc03t01n2023
+Pass=mc04t01n2023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=40000
-LAST_PORT=40099
+LAST_PORT=40299
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -166,13 +166,13 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-#wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
-#chmod 777 /root/Rotation.sh
-#cat >>/var/spool/cron/root<<EOF
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
+chmod 777 /root/Rotation.sh
+cat >>/var/spool/cron/root<<EOF
 #day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
 #*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#EOF
+EOF
