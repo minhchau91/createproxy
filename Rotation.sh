@@ -92,7 +92,7 @@ Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 FIRST_PORT=30000
-LAST_PORT=30149
+LAST_PORT=30299
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
