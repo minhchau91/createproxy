@@ -107,15 +107,15 @@ mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-interface=eth0
+interface=enp1s0
 
 Auth=strong
 User=mcproxy
-Pass=proxy04d01t23y
+Pass=mcproxy2023
 Prefix=/64
 
 FIRST_PORT=40000
-LAST_PORT=40064
+LAST_PORT=40899
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
