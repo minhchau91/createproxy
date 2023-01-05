@@ -115,7 +115,7 @@ Pass=mcproxy2023
 Prefix=/64
 
 FIRST_PORT=40000
-LAST_PORT=40999
+LAST_PORT=41099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
