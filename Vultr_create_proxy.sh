@@ -94,7 +94,7 @@ EOF
 
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7$8}' ${WORKDATA})
+$(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
