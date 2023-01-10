@@ -6,13 +6,19 @@ random() {
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
 gen64() {
-	ip64() {
-		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+        ip64() {
+                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
 	}
-  ip56() {
-		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	}
-	echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
+        ip56() {
+                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+        }
+                
+        if [ $Prefix -eq 56 ]
+        then
+                echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
+        else
+                echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)
+        fi
 }
 install_3proxy() {
     echo "installing 3proxy"
@@ -112,9 +118,15 @@ IP4=$(curl -4 -s icanhazip.com)
 checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 echo "Detected your ipv4: $IP4" 
 echo "Detected your ipv6: $checkIP6" 
-#read -p "What is your ipv6 prefix? (exp: /56, /64): " Prefix
-Prefix=56
-read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
+read -p "What is your ipv6 prefix? (exp: 56, 64): " Prefix
+#Prefix=56
+if [ $Prefix -eq 56 ]
+then
+        read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d): " IP6
+else
+        read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
+fi
+
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
