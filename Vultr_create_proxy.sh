@@ -112,7 +112,7 @@ interface=enp1s0
 Auth=strong
 User=mcproxy
 Pass=mcproxy2023
-Prefix=/64
+Prefix=64
 
 FIRST_PORT=40000
 LAST_PORT=41099
