@@ -66,7 +66,7 @@ EOF
 
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7$8}' ${WORKDATA})
+$(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 
