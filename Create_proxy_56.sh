@@ -10,10 +10,6 @@ gen64() {
 		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
 	}
 	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
-	#ip56() {
-	#	echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	#}
-	#echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
 }
 install_3proxy() {
     echo "installing 3proxy"
@@ -115,11 +111,11 @@ echo "Detected your ipv4: $IP4"
 echo "Detected your ipv6: $checkIP6" 
 #read -p "What is your ipv6 prefix? (exp: /56, /64): " Prefix
 Prefix=64
-read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d): " IP6
+read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
-interface=eth0
+interface=enp2s0
 
 #while true; do
 #    read -p "Do you want to create auth for your proxy? (Y/N): " authConfirm
@@ -136,7 +132,7 @@ Pass=mcproxy2023
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=40000
-LAST_PORT=40249
+LAST_PORT=41099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -170,7 +166,7 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_56.sh" --output-document=/root/Rotation.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 #day - time
