@@ -107,7 +107,7 @@ mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-interface=enp1s0
+interface=enp2s0
 
 Auth=strong
 User=mcproxy
