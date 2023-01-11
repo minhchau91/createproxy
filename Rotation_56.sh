@@ -9,10 +9,11 @@ gen64() {
         ip64() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-	ip56() {
-		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	}
-	echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
+	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+	#ip56() {
+	#	echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+	#}
+	#echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
 }
 
 gen_3proxy() {
