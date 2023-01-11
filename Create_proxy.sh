@@ -115,7 +115,7 @@ read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
-interface=enp2s0
+interface=eth0
 
 #while true; do
 #    read -p "Do you want to create auth for your proxy? (Y/N): " authConfirm
@@ -132,7 +132,7 @@ Pass=mcproxy2023
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=40000
-LAST_PORT=41099
+LAST_PORT=40346
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
