@@ -166,7 +166,7 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Nocix_Rotation.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 #day - time
