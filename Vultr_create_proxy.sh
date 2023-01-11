@@ -98,6 +98,7 @@ $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 yum -y install gcc net-tools bsdtar zip make >/dev/null
 
 echo "working folder = /home/proxy-installer"
