@@ -90,8 +90,9 @@ User=$(awk -F "|" '{print $3}' ${WORKDATA2})
 Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
-#FIRST_PORT=$(awk -F "|" '{print $8}' ${WORKDATA2})
-#LAST_PORT=$(awk -F "|" '{print $9}' ${WORKDATA2})
+FIRST_PORT=$(awk -F "|" '{print $8}' ${WORKDATA2})
+LAST_PORT=$(awk -F "|" '{print $9}' ${WORKDATA2})
+echo "FIRST_PORT = ${FIRST_PORT}. LAST_PORT = ${LAST_PORT}"
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
