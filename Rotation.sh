@@ -83,17 +83,16 @@ WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 WORKDATA2="${WORKDIR}/ipv6-subnet.txt"
 
-IP4=$(curl -4 -s icanhazip.com)
+IP4=$(awk -F "|" '{print $7}' ${WORKDATA2})
 IP6=$(awk -F "|" '{print $1}' ${WORKDATA2})
 Prefix=$(awk -F "|" '{print $2}' ${WORKDATA2})
 User=$(awk -F "|" '{print $3}' ${WORKDATA2})
 Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
-#FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
-#LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
-FIRST_PORT=40000
-LAST_PORT=40349
+FIRST_PORT=$(awk -F "|" '{print $8}' ${WORKDATA2})
+LAST_PORT=$(awk -F "|" '{print $9}' ${WORKDATA2})
+echo "FIRST_PORT = ${FIRST_PORT}. LAST_PORT = ${LAST_PORT}"
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
