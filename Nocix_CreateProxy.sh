@@ -136,7 +136,7 @@ LAST_PORT=40349
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
-${IP6}|${Prefix}|${User}|${Pass}|${interface}|${Auth}|${IP4}
+${IP6}|${Prefix}|${User}|${Pass}|${interface}|${Auth}|${IP4}|${FIRST_PORT}|${LAST_PORT}
 EOF
 
 
