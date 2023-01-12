@@ -77,6 +77,7 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
+sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
@@ -92,7 +93,7 @@ Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 FIRST_PORT=40000
-LAST_PORT=40346
+LAST_PORT=40349
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
