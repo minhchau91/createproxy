@@ -113,6 +113,7 @@ bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
+sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 EOF
 chmod +x /etc/rc.local
 bash /etc/rc.local
