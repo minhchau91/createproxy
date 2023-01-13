@@ -70,18 +70,19 @@ $(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 
-/sbin/service network restart
+#/sbin/service network restart
+systemctl restart network
 #/sbin/iptables -F INPUT
 echo "installing apps"
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
-echo "working folder = /home/proxy-installer"
+systemctl restart networkecho "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 WORKDATA2="${WORKDIR}/ipv6-subnet.txt"
-
+sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(awk -F "|" '{print $1}' ${WORKDATA2})
 Prefix=$(awk -F "|" '{print $2}' ${WORKDATA2})
