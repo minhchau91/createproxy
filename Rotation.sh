@@ -78,7 +78,7 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
-systemctl restart networkecho "working folder = /home/proxy-installer"
+echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 WORKDATA2="${WORKDIR}/ipv6-subnet.txt"
