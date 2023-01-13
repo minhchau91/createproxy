@@ -24,7 +24,7 @@ nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
-stacksize 6291456 
+stacksize 6291456
 flush
 auth $Auth
 users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
@@ -60,7 +60,7 @@ gen_data() {
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "|" '{print "/sbin/iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
+    $(awk -F "|" '{print "/sbin/iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA})
 EOF
 }
 
@@ -70,8 +70,7 @@ $(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 
-#/sbin/service network restart
-systemctl restart network
+/sbin/service network restart
 #/sbin/iptables -F INPUT
 echo "installing apps"
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
@@ -82,7 +81,7 @@ echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 WORKDATA2="${WORKDIR}/ipv6-subnet.txt"
-sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
+
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(awk -F "|" '{print $1}' ${WORKDATA2})
 Prefix=$(awk -F "|" '{print $2}' ${WORKDATA2})
@@ -93,7 +92,7 @@ Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 FIRST_PORT=40000
-LAST_PORT=40346
+LAST_PORT=40549
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
