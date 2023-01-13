@@ -69,7 +69,9 @@ gen_ifconfig() {
 $(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
-
+ulimit -n 65535
+/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+sleep 5
 /sbin/service network restart
 #/sbin/iptables -F INPUT
 echo "installing apps"
@@ -111,6 +113,7 @@ systemctl start NetworkManager.service
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+sleep 5
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 chmod +x /etc/rc.local
