@@ -72,8 +72,9 @@ EOF
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
 sleep 5
-/sbin/service network restart
+#/sbin/service network restart
 #/sbin/iptables -F INPUT
+
 echo "installing apps"
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
 rm -fv /home/proxy-installer/data.txt
@@ -95,6 +96,11 @@ Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 FIRST_PORT=30000
 LAST_PORT=30219
+
+systemctl restart network
+systemctl start NetworkManager.service
+/sbin/ifup ${interface}
+sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
