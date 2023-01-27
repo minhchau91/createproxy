@@ -94,8 +94,8 @@ interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
-FIRST_PORT=30000
-LAST_PORT=30199
+FIRST_PORT=40000
+LAST_PORT=40349
 
 systemctl restart network
 systemctl start NetworkManager.service
