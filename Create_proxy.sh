@@ -127,7 +127,7 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=mcproxy012023
+Pass=mcproxy022023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
@@ -168,7 +168,7 @@ gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
-#cat >>/var/spool/cron/root<<EOF
+cat >>/var/spool/cron/root<<EOF
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -176,5 +176,5 @@ chmod 777 /root/Rotation.sh
 #*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
