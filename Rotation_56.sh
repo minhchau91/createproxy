@@ -9,7 +9,10 @@ gen64() {
         ip64() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-        echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+        ip56() {
+		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+	}
+	echo "$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)"
 }
 
 gen_3proxy() {
@@ -24,7 +27,7 @@ nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
-stacksize 6291456 
+stacksize 6291456
 flush
 auth $Auth
 users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
@@ -60,7 +63,7 @@ gen_data() {
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "|" '{print "/sbin/iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
+    $(awk -F "|" '{print "/sbin/iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA})
 EOF
 }
 
@@ -69,15 +72,17 @@ gen_ifconfig() {
 $(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
-
-/sbin/service network restart
+ulimit -n 65535
+/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+sleep 5
+#/sbin/service network restart
 #/sbin/iptables -F INPUT
+
 echo "installing apps"
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
-sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
@@ -92,8 +97,13 @@ interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 #FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 #LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
-FIRST_PORT=40000
-LAST_PORT=40799
+FIRST_PORT=30000
+LAST_PORT=30249
+
+systemctl restart network
+systemctl start NetworkManager.service
+/sbin/ifup ${interface}
+sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
@@ -112,6 +122,7 @@ systemctl start NetworkManager.service
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+sleep 5
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 chmod +x /etc/rc.local
