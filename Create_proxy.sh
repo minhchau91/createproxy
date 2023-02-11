@@ -125,7 +125,7 @@ interface=eth0
 #        * ) echo "Please answer yes or no.";;
 #    esac
 #done
-Auth=strong
+Auth=none
 User=mcproxy
 Pass=mcproxy022023
 
@@ -168,9 +168,9 @@ gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
-#cat >>/var/spool/cron/root<<EOF
+cat >>/var/spool/cron/root<<EOF
 #day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -181,4 +181,4 @@ chmod 777 /root/Rotation.sh
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#EOF
+EOF
