@@ -172,8 +172,8 @@ cat >>/var/spool/cron/root<<EOF
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
 #*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
