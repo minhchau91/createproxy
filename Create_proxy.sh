@@ -106,13 +106,13 @@ WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
-#checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
+checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
+#IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 echo "Detected your ipv4: $IP4" 
 echo "Detected your ipv6: $checkIP6" 
 #read -p "What is your ipv6 prefix? (exp: /56, /64): " Prefix
 Prefix=64
-#read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
+read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
