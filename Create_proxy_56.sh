@@ -173,7 +173,7 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_56.
 chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 #day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -182,6 +182,6 @@ cat >>/var/spool/cron/root<<EOF
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
