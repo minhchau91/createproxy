@@ -99,6 +99,7 @@ EOF
 }
 echo "installing apps"
 yum -y install gcc net-tools bsdtar zip make >/dev/null
+echo "IPV6FORWARDING="yes"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
@@ -156,6 +157,7 @@ gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 
 cat >>/etc/rc.local <<EOF
 systemctl start NetworkManager.service
+/bin/pkill -f 'dhclient'
 ifup ${interface}
 bash ${WORKDIR}/boot_iptables.sh
 bash ${WORKDIR}/boot_ifconfig.sh
