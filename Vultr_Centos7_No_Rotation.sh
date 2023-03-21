@@ -98,6 +98,8 @@ $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
+yum clean all
+yum install net-tools -y
 yum -y install gcc net-tools bsdtar zip make >/dev/null
 #echo "IPV6FORWARDING="yes"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
