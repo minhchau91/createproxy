@@ -169,7 +169,9 @@ gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_Atinh.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
-#cat >>/var/spool/cron/root<<EOF
+cat >>/var/spool/cron/root<<EOF
+#day
+30 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -182,4 +184,4 @@ chmod 777 /root/Rotation.sh
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#EOF
+EOF
