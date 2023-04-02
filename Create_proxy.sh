@@ -133,7 +133,7 @@ Pass=mcproxy042023
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=30249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -173,7 +173,7 @@ cat >>/var/spool/cron/root<<EOF
 #day
 #30 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -181,7 +181,7 @@ cat >>/var/spool/cron/root<<EOF
 #*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
