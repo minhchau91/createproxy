@@ -129,7 +129,7 @@ interface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 #        * ) echo "Please answer yes or no.";;
 #    esac
 #done
-Auth=strong
+Auth=none
 User=mcproxy
 Pass=mcproxy032023
 
