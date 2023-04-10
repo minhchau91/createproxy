@@ -134,7 +134,7 @@ Pass=mcproxy042023
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30999
+LAST_PORT=31374
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -172,9 +172,9 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_lar
 chmod 777 /root/Rotation.sh
 cat >>/var/spool/cron/root<<EOF
 #day
-#30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
+30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
-59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
