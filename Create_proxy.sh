@@ -126,7 +126,7 @@ interface=eth0
 #        * ) echo "Please answer yes or no.";;
 #    esac
 #done
-Auth=none
+Auth=strong
 User=mcproxy
 Pass=c1u0qUW6XulcEYko
 
