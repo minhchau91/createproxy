@@ -28,7 +28,7 @@ stacksize 6291456
 flush
 auth $Auth
 #users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
-users mcproxy:CL:mcproxy042023
+users $User:CL:$Pass
 $(awk -F "|" '{print "auth " $3"\n" \
 "allow " $1 "\n" \
 "proxy -6 -n -a -p" $6 " -i" $5 " -e"$7"\n" \
