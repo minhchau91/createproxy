@@ -173,6 +173,7 @@ chmod 777 /root/Rotation.sh
 cat >>rebootNetwork.sh<<EOF
 #!/bin/sh
 systemctl restart network
+/sbin/service network-manager restart
 bash /home/proxy-installer/boot_ifconfig.sh
 EOF
 chmod 777 rebootNetwork.sh
