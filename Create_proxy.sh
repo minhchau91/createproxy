@@ -171,7 +171,7 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh"
 chmod 777 /root/Rotation.sh
 
 #Restart Network
-#cat /dev/null > rebootNetwork.sh
+#cat /dev/null > /root/rebootNetwork.sh
 #cat >>rebootNetwork.sh<<EOF
 #!/bin/sh
 #systemctl restart network.service
