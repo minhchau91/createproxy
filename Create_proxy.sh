@@ -128,12 +128,12 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=c1u0qUW6XulcEYko
+Pass=mcproxy032023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30249
+LAST_PORT=30499
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -174,16 +174,19 @@ chmod 777 /root/Rotation.sh
 cat /dev/null > /root/rebootNetwork.sh
 cat >>rebootNetwork.sh<<EOF
 #!/bin/sh
+/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+ulimit -n 65535
 systemctl restart network.service
 ifup eth0
 bash /home/proxy-installer/boot_ifconfig.sh
+/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 chmod 777 rebootNetwork.sh
 
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-#30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
+30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
