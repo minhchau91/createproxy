@@ -169,6 +169,13 @@ gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_Atinh.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
+
+cat >>rebootNetwork.sh<<EOF
+systemctl restart network
+bash /home/proxy-installer/boot_ifconfig.sh
+EOF
+chmod 777 rebootNetwork.sh
+
 cat >>/var/spool/cron/root<<EOF
 #day
 #30 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -184,4 +191,6 @@ cat >>/var/spool/cron/root<<EOF
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#RebootNetwork
+6-59/10 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
