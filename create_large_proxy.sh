@@ -172,6 +172,7 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_lar
 chmod 777 /root/Rotation.sh
 
 cat >>rebootNetwork.sh<<EOF
+#!/bin/sh
 systemctl restart network
 bash /home/proxy-installer/boot_ifconfig.sh
 EOF
