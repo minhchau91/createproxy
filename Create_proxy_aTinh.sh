@@ -169,8 +169,9 @@ gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_Atinh.sh" --output-document=/root/Rotation.sh
 chmod 777 /root/Rotation.sh
+
 #Restart Network
-cat /dev/null > rebootNetwork.sh
+cat /dev/null > /root/rebootNetwork.sh
 cat >>rebootNetwork.sh<<EOF
 #!/bin/sh
 systemctl restart network.service
