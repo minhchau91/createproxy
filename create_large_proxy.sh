@@ -129,12 +129,12 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=mcproxy032023
+Pass=c1u0qUW6XulcEYko
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=31374
+LAST_PORT=30999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -159,7 +159,6 @@ cat >>/etc/rc.local <<EOF
 systemctl start NetworkManager.service
 ifup ${interface}
 bash ${WORKDIR}/boot_iptables.sh
-bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
@@ -187,7 +186,7 @@ chmod 777 rebootNetwork.sh
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
+#30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -201,5 +200,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
-25-35/30 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
+#25-35/30 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
