@@ -171,14 +171,9 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_Ati
 chmod 777 /root/Rotation.sh
 
 #Restart Network
-cat /dev/null > /root/rebootNetwork.sh
-cat >>rebootNetwork.sh<<EOF
-#!/bin/sh
-systemctl restart network.service
-ifup eth0
-bash /home/proxy-installer/boot_ifconfig.sh
-EOF
-chmod 777 rebootNetwork.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/root/rebootNetwork.sh
+chmod 777 /root/rebootNetwork.sh
+
 
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
@@ -197,5 +192,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
-6-55/5 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
+#5-55/10 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
