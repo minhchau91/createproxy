@@ -129,12 +129,12 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=mcproxy042023
+Pass=mcproxy032023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=30249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
