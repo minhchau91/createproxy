@@ -98,6 +98,8 @@ gen_ifconfig() {
 $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
+sysctl -w net.ipv6.conf.eth0.accept_dad=0
+
 echo "installing apps"
 yum -y install gcc net-tools bsdtar zip make >/dev/null
 
