@@ -5,12 +5,29 @@ random() {
 }
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
+#gen64() {
+#	ip64() {
+#		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+#	}
+#	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+#}
+
 gen64() {
-	ip64() {
-		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	}
-	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+        filename=/root/$1.txt
+        [ -f /root/$1.txt ] || echo "" >> /root/$1.txt
+        ip64() {
+                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+        }
+        IPV6=$1:$(ip64):$(ip64):$(ip64):$(ip64)
+        while grep -q $IPV6 "$filename"
+        do
+                echo "$IPV6" >> /root/duplicateipv6.txt
+                IPV6=$1:$(ip64):$(ip64):$(ip64):$(ip64)
+        done
+        echo "$IPV6" >> /root/$1.txt
+        echo "$IPV6"
 }
+
 install_3proxy() {
     echo "installing 3proxy"
     mkdir -p /3proxy
