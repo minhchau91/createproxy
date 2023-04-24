@@ -1,6 +1,5 @@
 #!/bin/sh
 
-sysctl -w net.ipv6.conf.eth0.accept_dad=0
 systemctl restart network
 cat >>/etc/rc2.local <<EOF
 touch /var/lock/subsys/local
