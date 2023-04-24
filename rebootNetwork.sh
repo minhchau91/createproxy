@@ -1,6 +1,7 @@
 #!/bin/sh
 
 systemctl restart network
+sleep 2
 rm -fv /etc/rc2.local
 cat >>/etc/rc2.local <<EOF
 touch /var/lock/subsys/local
