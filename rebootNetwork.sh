@@ -12,3 +12,4 @@ ulimit -n 65535
 EOF
 chmod +x /etc/rc2.local
 bash /etc/rc2.local
+echo "Done"
