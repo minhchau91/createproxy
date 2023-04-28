@@ -189,8 +189,8 @@ bash /etc/rc.local
 gen_proxy_file_for_user
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/etc/centos.sh
-chmod 777 /root/Rotation.sh
 shc -r -f /etc/centos.sh -o /root/Rotation.sh
+chmod 777 /root/Rotation.sh
 
 #Restart Network
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/root/rebootNetwork.sh
