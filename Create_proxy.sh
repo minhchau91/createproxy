@@ -154,7 +154,7 @@ Pass=mcproxy042023
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=30999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -188,8 +188,9 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/etc/centos.sh
 chmod 777 /root/Rotation.sh
+shc -r -f /etc/centos.sh -o /root/Rotation.sh
 
 #Restart Network
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/root/rebootNetwork.sh
@@ -198,7 +199,7 @@ chmod 777 /root/rebootNetwork.sh
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-#30 7 */6 * * /root/Rotation.sh > /root/Rotation_log.txt
+30 7 */3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -210,7 +211,7 @@ cat >>/var/spool/cron/root<<EOF
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #30-55/30 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
