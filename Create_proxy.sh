@@ -117,6 +117,9 @@ EOF
 sysctl -w net.ipv6.conf.eth0.accept_dad=0
 echo "installing apps"
 yum -y install gcc net-tools bsdtar zip make >/dev/null
+sudo yum -y install epel-release
+sudo yum -y install shc
+
 
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
