@@ -149,7 +149,7 @@ interface=eth0
 #done
 Auth=strong
 User=mcproxy
-Pass=c1u0qUW6XulcEYko
+Pass=mcproxy042023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
@@ -210,7 +210,7 @@ cat >>/var/spool/cron/root<<EOF
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #30-55/30 * * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
