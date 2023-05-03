@@ -147,9 +147,9 @@ interface=eth0
 #        * ) echo "Please answer yes or no.";;
 #    esac
 #done
-Auth=strong
+Auth=none
 User=mcproxy
-Pass=mcproxy042023
+Pass=mcproxy052023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
@@ -199,7 +199,7 @@ chmod 777 /root/rebootNetwork.sh
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-#30 7 */3 * * /root/Rotation.sh > /root/Rotation_log.txt
+00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
