@@ -2,7 +2,6 @@
 
 ulimit -n 65535
 /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-sleep 5
 
 echo "rebootNetwork"
 
@@ -39,8 +38,6 @@ systemctl start NetworkManager.service
 /sbin/ifup ${interface}
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
-/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-sleep 5
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 chmod +x /etc/rc.local
