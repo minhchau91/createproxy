@@ -213,6 +213,9 @@ cat >>/var/spool/cron/root<<EOF
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#Special date of month
+#0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
