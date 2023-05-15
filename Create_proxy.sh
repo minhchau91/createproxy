@@ -137,7 +137,7 @@ read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
-interface=eth0
+interface=eth1
 
 #while true; do
 #    read -p "Do you want to create auth for your proxy? (Y/N): " authConfirm
