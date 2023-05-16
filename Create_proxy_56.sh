@@ -19,9 +19,9 @@ gen64() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
 		
-		ip56() {
+	ip56() {
 		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-		}
+	}
 		
         IPV6=$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)
         while grep -q $IPV6 "$filename"
