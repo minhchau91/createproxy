@@ -5,6 +5,12 @@ random() {
 }
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
+#gen64() {
+#	ip64() {
+#		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+#	}
+#	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+#}
 
 gen64() {
         filename=/root/$1.txt
@@ -12,9 +18,11 @@ gen64() {
         ip64() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-	ip56() {
+		
+		ip56() {
 		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	}
+		}
+		
         IPV6=$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64)
         while grep -q $IPV6 "$filename"
         do
@@ -111,8 +119,12 @@ gen_ifconfig() {
 $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
+sysctl -w net.ipv6.conf.eth0.accept_dad=0
 echo "installing apps"
 yum -y install gcc net-tools bsdtar zip make >/dev/null
+sudo yum -y install epel-release
+sudo yum -y install shc
+
 
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
@@ -121,11 +133,12 @@ mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
 checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
+#IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 echo "Detected your ipv4: $IP4" 
 echo "Detected your ipv6: $checkIP6" 
 #read -p "What is your ipv6 prefix? (exp: /56, /64): " Prefix
 Prefix=56
-read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d): " IP6
+read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 #checkinterface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 echo "Detected your active interface: $checkinterface"
 #read -p "Please confirm your active network interface : " interface
@@ -141,12 +154,12 @@ interface=eth0
 #done
 Auth=none
 User=mcproxy
-Pass=mcproxy022023
+Pass=mcproxy052023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30249
+LAST_PORT=30499
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -180,19 +193,34 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_56.sh" --output-document=/root/Rotation.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_56.sh" --output-document=/etc/centos.sh
+shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
+
+#Restart Network
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rebootcentos.sh
+shc -r -f /etc/rebootcentos.sh -o /root/rebootNetwork.sh
+chmod 777 /root/rebootNetwork.sh
+
+#Add Cronjob
 cat >>/var/spool/cron/root<<EOF
+#day
+00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
-59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-#*30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#Special date of month
+#0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
+#RebootNetwork
+#30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
 EOF
