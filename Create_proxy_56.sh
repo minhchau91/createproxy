@@ -205,22 +205,18 @@ chmod 777 /root/rebootNetwork.sh
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#minutes
-#*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#hour
-#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#Special date of month
-#0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#RebootNetwork
-#30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
+0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 7 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 9 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 11 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 13 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 15 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 17 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 19 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 21 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 23 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 25 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 12 27 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 0 29 * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
