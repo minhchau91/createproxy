@@ -154,12 +154,12 @@ interface=eth0
 #done
 Auth=none
 User=mcproxy
-Pass=mcproxyquoc052023
+Pass=mcproxy062023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=30249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -205,5 +205,5 @@ chmod 777 /root/rebootNetwork.sh
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
-59 11 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
