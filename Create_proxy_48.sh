@@ -149,12 +149,12 @@ interface=eth1
 #done
 Auth=none
 User=mcproxy
-Pass=mcproxy052023
+Pass=umiproxy062023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=31199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -198,9 +198,9 @@ shc -r -f /etc/rebootcentos.sh -o /root/rebootNetwork.sh
 chmod 777 /root/rebootNetwork.sh
 
 #Add Cronjob
-cat >>/var/spool/cron/root<<EOF
+#cat >>/var/spool/cron/root<<EOF
 #day
-00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
+#00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -218,4 +218,4 @@ cat >>/var/spool/cron/root<<EOF
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
-EOF
+#EOF
