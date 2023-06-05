@@ -1,6 +1,6 @@
 #!/bin/sh
-mv /etc/sysconfig/network-scripts/ifcfg-eth0 etc/sysconfig/network-scripts/bk-ifcfg-eth0
-cp /etc/sysconfig/network-scripts/ifcfg-eth1 etc/sysconfig/network-scripts/bk-ifcfg-eth1
+mv /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/bk-ifcfg-eth0
+cp /etc/sysconfig/network-scripts/ifcfg-eth1 /etc/sysconfig/network-scripts/bk-ifcfg-eth1
 sed -i 's/static/none/g' /etc/sysconfig/network-scripts/ifcfg-eth1
 sed -i 's/IPV6INIT="no"/IPV6INIT="yes"/g' /etc/sysconfig/network-scripts/ifcfg-eth1
 read -p "What is your ipv6 address /126?: " IPV6ADDR
