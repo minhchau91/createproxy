@@ -193,9 +193,8 @@ shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
 
 #Restart Network
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rebootcentos.sh
-shc -r -f /etc/rebootcentos.sh -o /root/rebootNetwork.sh
-chmod 777 /root/rebootNetwork.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
+chmod 777 /etc/rc2.local
 
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
@@ -217,8 +216,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
-#30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
-#60 hours
-#0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/10 * * * * /etc/rc2.local > /root/reboot3proxy.txt
 EOF
