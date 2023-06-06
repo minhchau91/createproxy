@@ -15,11 +15,11 @@ gen64() {
         ip40() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-        IPV6=$1$ip40:$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
+        IPV6=$1$(ip40):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
         while grep -q $IPV6 "$filename"
         do
                 echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1$ip40:$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
+                IPV6=$1$(ip40):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
         done
         echo "$IPV6" >> /root/$1.txt
         echo "$IPV6"
