@@ -25,7 +25,7 @@ gen64() {
         while grep -q $IPV6 "$filename"
         do
                 echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1$(ip40):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
+                IPV6=$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
         done
         echo "$IPV6" >> /root/$1.txt
         echo "$IPV6"
