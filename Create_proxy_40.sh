@@ -12,14 +12,14 @@ gen64() {
         ip64() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-        ip40() {
-                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-        }
-        IPV6=$1$(ip40):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
+        ip56() {
+		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+	}
+        IPV6=$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
         while grep -q $IPV6 "$filename"
         do
                 echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1$(ip40):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
+                IPV6=$1$(ip56):$(ip64):$(ip64):$(ip64):$(ip64):$(ip64)
         done
         echo "$IPV6" >> /root/$1.txt
         echo "$IPV6"
@@ -185,7 +185,7 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_48.sh" --output-document=/etc/centos.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_40.sh" --output-document=/etc/centos.sh
 shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
 
