@@ -114,8 +114,15 @@ gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 
 gen_3proxy >$WORKDIR/3proxy.cfg
-systemctl restart network
-bash ${WORKDIR}/boot_ifconfig.sh
+#systemctl restart network
+#bash ${WORKDIR}/boot_ifconfig.sh
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
-
+systemctl restart network
+bash ${WORKDIR}/boot_ifconfig.sh
+ulimit -n 65535
+#/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
+pid=$(pidof 3proxy)
+#kill $pid
+/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
+kill $pid
