@@ -167,13 +167,13 @@ echo "Detected your ipv6: $checkIP6"
 read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
-interface=eth0
-Prefix=64
+interface=eth1
+Prefix=48
 Auth=none
 User=mcproxy
 Pass=mcproxy062023
 FIRST_PORT=30000
-LAST_PORT=30499
+LAST_PORT=31199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -210,6 +210,7 @@ chmod 777 /root/Rotation.sh
 #Restart Network
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
 chmod 777 /etc/rc2.local
+bash /etc/rc2.local
 
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
