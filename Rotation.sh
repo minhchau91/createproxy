@@ -5,27 +5,60 @@ random() {
 }
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
-#gen64() {
-#        ip64() {
-#                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-#        }
-#        echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
-#}
 
-gen64() {
+genIPV6() {
+		
         filename=/root/$1.txt
         [ -f /root/$1.txt ] || echo "" >> /root/$1.txt
-        ip64() {
+        ramdom4() {
                 echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
         }
-        IPV6=$1:$(ip64):$(ip64):$(ip64):$(ip64)
-        while grep -q $IPV6 "$filename"
-        do
-                echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1:$(ip64):$(ip64):$(ip64):$(ip64)
-        done
-        echo "$IPV6" >> /root/$1.txt
-        echo "$IPV6"
+		ramdom2() {
+                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+        }
+		
+		if [[ $Prefix == "64" || $Prefix == "48" ]]; then
+			if [[ $Prefix == "64" ]]; then
+				IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				while grep -q $IPV6 "$filename"
+				do
+					echo "$IPV6" >> /root/duplicateipv6.txt
+					IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				done
+				echo "$IPV6" >> /root/$1.txt
+				echo "$IPV6"
+			else
+				IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				while grep -q $IPV6 "$filename"
+				do
+					echo "$IPV6" >> /root/duplicateipv6.txt
+					IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				done
+				echo "$IPV6" >> /root/$1.txt
+				echo "$IPV6"
+			fi
+		else
+			if [[ $Prefix == "56" ]]; then
+				IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				while grep -q $IPV6 "$filename"
+				do
+					echo "$IPV6" >> /root/duplicateipv6.txt
+					IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				done
+				echo "$IPV6" >> /root/$1.txt
+				echo "$IPV6"
+			else
+				IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				while grep -q $IPV6 "$filename"
+				do
+					echo "$IPV6" >> /root/duplicateipv6.txt
+					IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				done
+				echo "$IPV6" >> /root/$1.txt
+				echo "$IPV6"
+			fi
+		fi
+        
 }
 
 gen_3proxy() {
@@ -70,7 +103,7 @@ upload_proxy() {
 }
 gen_data() {
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$User|$Pass|$Auth|$interface|$IP4|$port|$(gen64 $IP6)|$Prefix"
+        echo "$User|$Pass|$Auth|$interface|$IP4|$port|$(genIPV6 $IP6)|$Prefix"
     done
 }
 
@@ -85,14 +118,8 @@ gen_ifconfig() {
 $(awk -F "|" '{print "/sbin/ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
-ulimit -n 65535
-/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-sleep 5
-#/sbin/service network restart
-#/sbin/iptables -F INPUT
 
-echo "installing apps"
-rm -fv /usr/local/etc/3proxy/3proxy.cfg
+echo "Rotation"
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
@@ -108,35 +135,30 @@ User=$(awk -F "|" '{print $3}' ${WORKDATA2})
 Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
-#FIRST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
-#LAST_PORT=$(awk -F "|" '{print $7}' ${WORKDATA2})
 FIRST_PORT=30000
-LAST_PORT=30499
-
-systemctl restart network
-systemctl start NetworkManager.service
-/sbin/ifup ${interface}
-sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
+LAST_PORT=31199
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
 gen_data >$WORKDIR/data.txt
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
-chmod +x $WORKDIR/boot_*.sh /etc/rc.local
+chmod +x $WORKDIR/boot_*.sh
 
-gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
+gen_3proxy >$WORKDIR/3proxy.cfg
 
+rm -fv /usr/local/etc/3proxy/3proxy.cfg
+mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 rm -fv /etc/rc.local
 
+pid=$(pidof 3proxy)
+systemctl restart network
+
 cat >>/etc/rc.local <<EOF
-touch /var/lock/subsys/local
-systemctl start NetworkManager.service
-/sbin/ifup ${interface}
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
-/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-sleep 5
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
+
 chmod +x /etc/rc.local
 bash /etc/rc.local
+/bin/kill -9 $pid
