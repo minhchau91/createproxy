@@ -150,8 +150,9 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 rm -fv /etc/rc.local
 
-pid=$(pidof 3proxy)
 systemctl restart network
+pid=$(pidof 3proxy)
+/bin/kill -9 $pid
 
 cat >>/etc/rc.local <<EOF
 bash ${WORKDIR}/boot_ifconfig.sh
@@ -161,4 +162,3 @@ EOF
 
 chmod +x /etc/rc.local
 bash /etc/rc.local
-/bin/kill -9 $pid
