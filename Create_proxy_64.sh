@@ -188,7 +188,7 @@ bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/etc/centos.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_64.sh" --output-document=/etc/centos.sh
 shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
 
