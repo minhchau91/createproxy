@@ -155,6 +155,9 @@ pid=$(pidof 3proxy)
 /bin/kill -9 $pid
 
 cat >>/etc/rc.local <<EOF
+touch /var/lock/subsys/local
+systemctl start NetworkManager.service
+/sbin/ifup ${interface}
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
