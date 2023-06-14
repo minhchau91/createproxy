@@ -190,9 +190,10 @@ shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
 
 #Restart Network
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rebootcentos.sh
-shc -r -f /etc/rebootcentos.sh -o /root/rebootNetwork.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
+shc -r -f /etc/rc2.local -o /root/rebootNetwork.sh
 chmod 777 /root/rebootNetwork.sh
+chmod +x /etc/rc2.local
 
 #Add Cronjob
 #cat >>/var/spool/cron/root<<EOF
