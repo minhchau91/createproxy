@@ -146,7 +146,7 @@ interface=eth1
 #done
 Auth=none
 User=mcproxy
-Pass=umiproxy062023
+Pass=mcproxy062023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
