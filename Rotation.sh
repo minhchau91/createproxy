@@ -123,6 +123,7 @@ echo "Rotation"
 rm -fv /home/proxy-installer/data.txt
 rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
+rm -fv /home/proxy-installer/3proxy.cfg
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
