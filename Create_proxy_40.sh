@@ -196,7 +196,7 @@ chmod 777 /root/rebootNetwork.sh
 chmod +x /etc/rc2.local
 
 #Add Cronjob
-#cat >>/var/spool/cron/root<<EOF
+cat >>/var/spool/cron/root<<EOF
 #day
 #00 7 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
@@ -216,4 +216,4 @@ chmod +x /etc/rc2.local
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #30-55/30 */4 * * * /root/rebootNetwork.sh > /root/rebootNetwork_log.txt
-#EOF
+EOF
