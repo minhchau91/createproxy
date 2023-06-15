@@ -212,6 +212,11 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwor
 chmod 777 /etc/rc2.local
 bash /etc/rc2.local
 
+#Change IPv6 script
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/changeipv6.sh" --output-document=/etc/changeipv6.sh
+shc -r -f /etc/changeipv6.sh -o /root/changeipv6.sh
+chmod 777 /root/changeipv6.sh
+
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
