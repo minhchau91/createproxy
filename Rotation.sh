@@ -152,7 +152,7 @@ rm -fv /etc/rc.local
 
 systemctl restart network
 pid=$(pidof 3proxy)
-/bin/kill -9 $pid
+/bin/kill -p $pid
 
 cat >>/etc/rc.local <<EOF
 touch /var/lock/subsys/local
