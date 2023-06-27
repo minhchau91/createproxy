@@ -139,7 +139,7 @@ Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 FIRST_PORT=30000
 LAST_PORT=30049
 
-echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
+echo "Internal ip = ${IP4}. Exteranl subnet for ip6 = ${IP6}::/${Prefix}"
 
 gen_data >$WORKDIR/data.txt
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
