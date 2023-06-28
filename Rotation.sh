@@ -151,6 +151,7 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 rm -fv /etc/rc.local
 
+/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
 systemctl restart network
 pid=$(pidof 3proxy)
 sudo /bin/kill $pid
