@@ -204,8 +204,5 @@ chmod 777 /root/rebootNetwork.sh
 
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
-#day
-#0 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#day - time
-59 11 * * * /root/Rotation.sh > /root/Rotation_log.txt
+1 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 EOF
