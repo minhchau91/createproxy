@@ -169,11 +169,11 @@ echo "Detected your active interface: $checkinterface"
 
 interface=eth0
 Prefix=64
-Auth=none
+Auth=strong
 User=mcproxy
-Pass=mcproxy072023
+Pass=mcproxy082023
 FIRST_PORT=60000
-LAST_PORT=60249
+LAST_PORT=60199
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
