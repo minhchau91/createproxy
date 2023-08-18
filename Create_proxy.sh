@@ -173,7 +173,7 @@ Auth=none
 User=mcproxy
 Pass=mcproxy082023
 FIRST_PORT=60000
-LAST_PORT=60249
+LAST_PORT=60299
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -221,7 +221,7 @@ chmod 777 /root/changeipv6.sh
 cat >>/var/spool/cron/root<<EOF
 #day
 #00 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-0 16 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 16 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
@@ -229,6 +229,7 @@ cat >>/var/spool/cron/root<<EOF
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #1 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 1-23/2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #Special date of month
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
