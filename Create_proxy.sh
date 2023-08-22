@@ -173,7 +173,7 @@ Auth=none
 User=mcproxy
 Pass=mcproxy082023
 FIRST_PORT=20000
-LAST_PORT=20249
+LAST_PORT=20299
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
