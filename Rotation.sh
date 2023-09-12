@@ -79,7 +79,7 @@ auth $Auth
 users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
 $(awk -F "|" '{print "auth " $3"\n" \
 "allow " $1 "\n" \
-"socks -6 -n -a -p" $6 " -i" $5 " -e"$7"\n" \
+"proxy -6 -n -a -p" $6 " -i" $5 " -e"$7"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
 }
