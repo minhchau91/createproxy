@@ -169,7 +169,7 @@ echo "Detected your active interface: $checkinterface"
 
 interface=eth0
 Prefix=64
-Auth=none
+Auth=strong
 User=levanthanh
 Pass=levanthanh
 FIRST_PORT=20000
