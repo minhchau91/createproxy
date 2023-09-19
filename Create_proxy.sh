@@ -170,8 +170,8 @@ echo "Detected your active interface: $checkinterface"
 interface=eth0
 Prefix=64
 Auth=none
-User=mcproxy
-Pass=mcproxy092023
+User=levanthanh
+Pass=levanthanh
 FIRST_PORT=20000
 LAST_PORT=20249
 
