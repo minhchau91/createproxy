@@ -221,7 +221,7 @@ chmod 777 /root/changeipv6.sh
 cat >>/var/spool/cron/root<<EOF
 #day
 #00 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 16 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
+0 13 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
