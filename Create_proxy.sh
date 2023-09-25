@@ -167,13 +167,13 @@ echo "Detected your ipv6: $checkIP6"
 read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
-interface=eth1
+interface=eth0
 Prefix=56
 Auth=none
 User=mcproxy
 Pass=mcproxy092023
-FIRST_PORT=12000
-LAST_PORT=12999
+FIRST_PORT=20000
+LAST_PORT=20299
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
