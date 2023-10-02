@@ -171,7 +171,7 @@ interface=eth0
 Prefix=64
 Auth=none
 User=mcproxy
-Pass=mcproxy092023
+Pass=mcproxy102023
 FIRST_PORT=20000
 LAST_PORT=20249
 
