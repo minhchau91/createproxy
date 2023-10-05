@@ -130,13 +130,13 @@ interface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 #    esac
 #done
 Auth=none
-User=mcproxy
-Pass=mcproxy032023
+User=levanthanh
+Pass=levanthanh
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
-FIRST_PORT=30000
-LAST_PORT=30299
+FIRST_PORT=20000
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -168,6 +168,15 @@ ulimit -n 65535
 EOF
 
 bash /etc/rc.local
+
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/etc/centos.sh
+shc -r -f /etc/centos.sh -o /root/Rotation.sh
+chmod 777 /root/Rotation.sh
+
+#Restart Network
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
+chmod 777 /etc/rc2.local
+bash /etc/rc2.local
 
 gen_proxy_file_for_user
 
