@@ -101,6 +101,8 @@ echo "installing apps"
 yum clean all
 yum install net-tools -y
 yum -y install gcc net-tools bsdtar zip make >/dev/null
+sudo yum -y install epel-release
+sudo yum -y install shc
 #echo "IPV6FORWARDING="yes"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
 echo "working folder = /home/proxy-installer"
