@@ -170,8 +170,8 @@ echo "Detected your active interface: $checkinterface"
 interface=eth0
 Prefix=64
 Auth=none
-User=levanthanh
-Pass=levanthanh
+User=mcproxy
+Pass=mcproxy102023
 FIRST_PORT=20000
 LAST_PORT=20249
 
@@ -221,11 +221,11 @@ chmod 777 /root/changeipv6.sh
 cat >>/var/spool/cron/root<<EOF
 #day
 #00 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-0 13 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 13 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
 #day - time
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-#*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #1 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
