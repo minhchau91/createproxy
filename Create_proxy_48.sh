@@ -153,8 +153,8 @@ Pass=mcproxy102023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
-FIRST_PORT=10000
-LAST_PORT=10999
+FIRST_PORT=11000
+LAST_PORT=12999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
