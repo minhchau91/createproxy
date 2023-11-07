@@ -132,8 +132,8 @@ interface=$(ip addr show | awk '/inet.*brd/{print $NF}')
 #    esac
 #done
 Auth=none
-User=levanthanh
-Pass=levanthanh
+User=mcproxy
+Pass=mcproxy112023
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
@@ -194,7 +194,7 @@ gen_proxy_file_for_user
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #EOF
