@@ -228,7 +228,7 @@ cat >>/var/spool/cron/root<<EOF
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-1 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 1-23/2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #Special date of month
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
