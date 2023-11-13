@@ -79,6 +79,5 @@ sed -i "s/${old_ipv6}/${new_ipv6}/g" ${WORKDIR}/boot_ifconfig.sh
 
 pid=$(pidof 3proxy)
 sudo /bin/kill -SIGUSR1 $pid
-/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 
 echo "done"
