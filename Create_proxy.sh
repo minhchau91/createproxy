@@ -235,5 +235,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
-#/10 * * * * /etc/rc2.local > /root/reboot3proxy.txt
+0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
 EOF
