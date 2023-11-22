@@ -168,7 +168,7 @@ read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
 interface=eth0
-Prefix=64
+Prefix=48
 Auth=none
 User=mcproxy
 Pass=mcproxy112023
