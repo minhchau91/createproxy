@@ -148,13 +148,13 @@ interface=eth1
 #    esac
 #done
 Auth=none
-User=mcproxy
-Pass=mcproxy102023
+User=drt
+Pass=drt2024
 
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
-FIRST_PORT=11000
-LAST_PORT=12999
+FIRST_PORT=31000
+LAST_PORT=31999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -212,7 +212,7 @@ chmod 777 /root/rebootNetwork.sh
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #Special date of month
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
