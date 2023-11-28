@@ -167,13 +167,13 @@ echo "Detected your ipv6: $checkIP6"
 read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
-interface=eth0
+interface=eth1
 Prefix=64
 Auth=none
 User=drt
 Pass=drt2024
 FIRST_PORT=20000
-LAST_PORT=20249
+LAST_PORT=20999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -226,10 +226,11 @@ cat >>/var/spool/cron/root<<EOF
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 1-23/2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #Special date of month
@@ -237,4 +238,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
+0 */3 * * * /etc/rc2.local > /root/reboot3proxy.txt
 EOF
