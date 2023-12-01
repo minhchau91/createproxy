@@ -186,6 +186,7 @@ echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
+gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
@@ -209,14 +210,19 @@ IPV6FORWARDING=yes
 STARTMODE=auto
 TYPE=Ethernet
 USERCTL=no
+IPV6ADDR_SECONDARIES="
+InputIPV6Here
 "
 EOF
+
+ext=$(<$WORKDIR/boot_ifconfig.sh)
 
 cat >>/etc/rc.local <<EOF
 systemctl restart network
 systemctl start NetworkManager.service
 ifup ${interface}
 bash ${WORKDIR}/boot_iptables.sh
+sed -i "/InputIPV6Here/a ${ext//$'\n'/\\\n}" base
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
