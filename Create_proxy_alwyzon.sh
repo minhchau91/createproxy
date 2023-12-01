@@ -192,7 +192,7 @@ chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 
 rm -fv /etc/sysconfig/network-scripts/ifcfg-eth0
-cp /etc/sysconfig/network-scripts/bk-ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
+#cp /etc/sysconfig/network-scripts/bk-ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
 cat >>/etc/sysconfig/network-scripts/ifcfg-eth0<<EOF
 BOOTPROTO=none
 DEFROUTE=yes
