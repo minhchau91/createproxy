@@ -190,10 +190,27 @@ chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 
-cp -f /etc/sysconfig/network-scripts/bk-ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
+rm -fv /etc/sysconfig/network-scripts/ifcfg-eth0
+cp /etc/sysconfig/network-scripts/bk-ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
 cat >>/etc/sysconfig/network-scripts/ifcfg-eth0<<EOF
+BOOTPROTO=none
+DEFROUTE=yes
+DEVICE=eth0
+GATEWAY=94.177.9.1
+HWADDR=e2:7f:83:ba:5f:64
+IPADDR=94.177.9.59
+IPADDR6=2a0d:f302:120:b638::1/48
+IPV6ADDR=2a0d:f302:120:b638::2/48
+IPV6INIT=yes
+IPV6_DEFAULTGW=2a0d:f302:120::1
+NETMASK=255.255.255.192
+ONBOOT=yes
+IPV6FORWARDING=yes
+STARTMODE=auto
+TYPE=Ethernet
+USERCTL=no
 IPV6ADDR_SECONDARIES="
-$(awk -F "|" '{print "$7"\n"}' ${WORKDATA})
+gen_ifconfig()
 "
 EOF
 
