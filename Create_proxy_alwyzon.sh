@@ -173,7 +173,7 @@ Auth=none
 User=drt
 Pass=drt2024
 FIRST_PORT=20000
-LAST_PORT=20999
+LAST_PORT=20249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -190,6 +190,7 @@ chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 
+cp -y /etc/sysconfig/network-scripts/bk-ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
 cat >>/etc/sysconfig/network-scripts/ifcfg-eth0<<EOF
 IPV6ADDR_SECONDARIES="
 $(awk -F "|" '{print "$7"\n"}' ${WORKDATA})
