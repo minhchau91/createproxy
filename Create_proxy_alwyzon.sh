@@ -145,7 +145,7 @@ EOF
 
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "|" '{print "$7}' ${WORKDATA})
+$(awk -F "|" '{print $7}' ${WORKDATA})
 EOF
 }
 
