@@ -9,7 +9,8 @@ cat >>/root/danielchau.sh <<EOF
 EOF
 chmod 777 /root/danielchau.sh
 
-cat >>/var/spool/cron/root<<EOF
+cat /dev/null > /var/spool/cron/crontabs/root
+cat >>/var/spool/cron/crontabs/root<<EOF
 @reboot /root/danielchau.sh > /root/danielchau_log.txt
 EOF
 ./danielchau.sh
