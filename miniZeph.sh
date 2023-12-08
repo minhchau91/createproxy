@@ -13,7 +13,7 @@ chmod +x /root/danielchau.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
-@reboot /root/danielchau.sh
+@reboot /root/danielchau.sh*
 EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
