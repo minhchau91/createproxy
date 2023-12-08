@@ -1,4 +1,6 @@
 #!/bin/sh
+sudo apt-get update -y
+sudo apt-get install cpulimit -y
 cores=$(nproc --all)
 echo "Cores: $cores"
 rounded_cores=$((cores * 9 / 10))
