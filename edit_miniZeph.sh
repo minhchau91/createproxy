@@ -6,4 +6,4 @@ echo "rounded_cores: $rounded_cores"
 limitCPU=$((cores * 90))
 echo "limitCPU: $limitCPU" 
 sed -i 's/--cpu-max-threads-hint=${rounded_cores}/--threads=${cores}/g' danielchau.sh
-sed -i -e 'cpulimit --limit=$limitCPU --pid $(pgrep xmrig)  > /dev/null 2>&1 &' file
+sed -i -e 'cpulimit --limit=$limitCPU --pid $(pgrep xmrig)  > /dev/null 2>&1 &' danielchau.sh
