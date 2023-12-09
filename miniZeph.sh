@@ -9,8 +9,21 @@ cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 read -p "What is Worker? (exp: vps01): " worker
 limitCPU=$((cores * 90))
+
+#find best servers
+servers=("fr-zephyr.miningocean.org" "de-zephyr.miningocean.org" "ca-zephyr.miningocean.org" "us-zephyr.miningocean.org" "hk-zephyr.miningocean.org" "sg-zephyr.miningocean.org")
+fastest_server=""
+min_latency=999999
+for server in "${servers[@]}"; do
+    latency=$(ping -c 4 $server | awk '/^rtt/ { print $4 }' | cut -d '/' -f 2)
+    if (( $(echo "$latency < $min_latency" | bc -l) )); then
+        min_latency=$latency
+        fastest_server=$server
+    fi
+done
+
 cat >>/root/danielchau.sh <<EOF
-sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o ca-zephyr.miningocean.org:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p $worker -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p $worker -a rx/0 -k
 cpulimit --limit=$limitCPU --pid $(pgrep xmrig) > /dev/null 2>&1 &
 EOF
 chmod +x /root/danielchau.sh
