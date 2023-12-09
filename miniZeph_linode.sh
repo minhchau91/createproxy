@@ -1,7 +1,7 @@
 #!/bin/sh
 read -p "What is Worker? (exp: vps01): " worker
-wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
-tar -xvf xmrig.tar.gz
+#wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
+#tar -xvf xmrig.tar.gz
 chmod +x ./xmrig-6.21.0/* 
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 #find best servers
