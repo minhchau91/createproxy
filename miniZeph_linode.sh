@@ -4,7 +4,6 @@ wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/relea
 tar -xvf xmrig.tar.gz
 chmod +x ./xmrig-6.21.0/* 
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
-read -p "What is Worker? (exp: vps01): " worker
 #find best servers
 servers=("fr-zephyr.miningocean.org" "de-zephyr.miningocean.org" "ca-zephyr.miningocean.org" "us-zephyr.miningocean.org" "hk-zephyr.miningocean.org" "sg-zephyr.miningocean.org")
 fastest_server=""
