@@ -11,7 +11,7 @@ cores=$(nproc --all)
 limitCPU=$((cores * 90))
 
 cat >>/root/danielchau.sh <<EOF
-sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o stratum-eu.rplant.xyz:17054 -u stratum-eu.rplant.xyz:17054 -p $worker -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -a ghostrider --url stratum-eu.rplant.xyz:17054 --tls --user Ram7FgfDBNRgK4KcUgcNfMA8c1FgFBWE5P.$worker
 EOF
 chmod +x /root/danielchau.sh
 
