@@ -10,8 +10,21 @@ cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 90))
 
+#find best servers
+servers=("stratum-eu.rplant.xyz" "stratum-asia.rplant.xyz" "stratum-na.rplant.xyz")
+fastest_server=""
+min_latency=999999
+for server in "${servers[@]}"; do
+    latency=$(ping -c 2 $server | awk '/^rtt/ { print $4 }' | cut -d '/' -f 2)
+    if (( $(echo "$latency < $min_latency" | bc -l) )); then
+        min_latency=$latency
+        fastest_server=$server
+    fi
+done
+echo "$fastest_server with min_latency is: $latency"
+
 cat >>/root/danielchau.sh <<EOF
-sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -a ghostrider --url stratum-eu.rplant.xyz:17054 --tls --user Ram7FgfDBNRgK4KcUgcNfMA8c1FgFBWE5P.$worker
+sudo /root/xmrig-6.21.0/xmrig --background -a ghostrider --url $fastest_server:17054 --tls --user Ram7FgfDBNRgK4KcUgcNfMA8c1FgFBWE5P.$worker --pass m=solo
 EOF
 chmod +x /root/danielchau.sh
 
