@@ -1,6 +1,6 @@
 #!/bin/sh
-worker=$(grep -oP '\-p\s+\K\S+' /root/danielchau.sh | cut -d' ' -f1)
-#read -p "What is Worker? (exp: vps01): " worker
+#worker=$(grep -oP '\-p\s+\K\S+' /root/danielchau.sh | cut -d' ' -f1)
+read -p "What is Worker? (exp: vps01): " worker
 #sudo apt-get update -y
 #sudo apt-get install cpulimit -y
 #wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
@@ -10,9 +10,8 @@ cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 90))
-
 #find best servers
-servers=("stratum-eu.rplant.xyz" "stratum-asia.rplant.xyz" "stratum-na.rplant.xyz")
+servers=("fr-zephyr.miningocean.org" "de-zephyr.miningocean.org" "ca-zephyr.miningocean.org" "us-zephyr.miningocean.org" "hk-zephyr.miningocean.org" "sg-zephyr.miningocean.org")
 fastest_server=""
 min_latency=999999
 for server in "${servers[@]}"; do
@@ -24,13 +23,12 @@ for server in "${servers[@]}"; do
 done
 echo "$fastest_server with min_latency is: $latency"
 
-mv /root/danielchau.sh /root/mininZeph.sh
 cat >>/root/danielchau.sh <<EOF
-sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17054 --tls --user Ram7FgfDBNRgK4KcUgcNfMA8c1FgFBWE5P.$worker --pass m=solo
+sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p $worker -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
-#sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
