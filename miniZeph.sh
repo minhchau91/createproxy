@@ -24,6 +24,7 @@ done
 echo "$fastest_server with min_latency is: $latency"
 
 cat >>/root/danielchau.sh <<EOF
+#!/bin/bash
 sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p $worker -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
