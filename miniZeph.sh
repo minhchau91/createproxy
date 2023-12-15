@@ -8,7 +8,7 @@ chmod +x ./xmrig-6.21.0/*
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
-limitCPU=$((cores * 90))
+limitCPU=$((cores * 80))
 
 #find best servers
 servers=("fr-zephyr.miningocean.org" "de-zephyr.miningocean.org" "ca-zephyr.miningocean.org" "us-zephyr.miningocean.org" "hk-zephyr.miningocean.org" "sg-zephyr.miningocean.org")
