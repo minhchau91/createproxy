@@ -170,10 +170,10 @@ echo "Detected your active interface: $checkinterface"
 interface=eth1
 Prefix=48
 Auth=none
-User=drt
-Pass=drt2024
-FIRST_PORT=20000
-LAST_PORT=20999
+User=mcproxy
+Pass=ngockiet2023
+FIRST_PORT=10000
+LAST_PORT=10999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -228,7 +228,7 @@ cat >>/var/spool/cron/root<<EOF
 #minutes
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -238,5 +238,5 @@ cat >>/var/spool/cron/root<<EOF
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
 #0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
-0 */3 * * * /etc/rc2.local > /root/reboot3proxy.txt
+#0 */3 * * * /etc/rc2.local > /root/reboot3proxy.txt
 EOF
