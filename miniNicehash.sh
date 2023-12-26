@@ -1,5 +1,5 @@
 #!/bin/sh
-read -p "What is Worker? (exp: vps01): " worker
+#read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
