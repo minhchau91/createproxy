@@ -13,7 +13,7 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.auto.nicehash.com:9200 -u NHbVF7wPddHyFthiCiA4yuc6YU916LHbgSJB.vultr27-12 -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.auto.nicehash.com:9200 -u NHbVF7wPddHyFthiCiA4yuc6YU916LHbgSJB.vultr_Atlanta27-12 -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
