@@ -30,9 +30,7 @@ sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o 
 EOF
 chmod +x /root/danielchau.sh
 
-if [[ $cores > 6  ]]; then
-    sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
-fi
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
