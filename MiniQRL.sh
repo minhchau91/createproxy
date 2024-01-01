@@ -2,11 +2,11 @@
 #read -p "What is Worker? (exp: vps01): " worker
 mv /root/danielchau.sh /root/backup_danielchau.sh
 IP4=$(curl -4 -s icanhazip.com)
-#sudo apt-get update -y
-#sudo apt-get install cpulimit -y
-#wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
-#tar -xvf xmrig.tar.gz
-#chmod +x ./xmrig-6.21.0/* 
+sudo apt-get update -y
+sudo apt-get install cpulimit -y
+wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
+tar -xvf xmrig.tar.gz
+chmod +x ./xmrig-6.21.0/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
