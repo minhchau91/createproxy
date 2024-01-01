@@ -18,7 +18,8 @@ sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.aut
 EOF
 chmod +x /root/danielchau.sh
 
-if [[ $cores > 6  ]]; then
+if $cores > 6
+then
   sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 fi
 
