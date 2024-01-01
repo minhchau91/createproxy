@@ -19,7 +19,7 @@ EOF
 chmod +x /root/danielchau.sh
 
 if [[ $cores > 6  ]]; then
-    sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
+  sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 fi
 
 cat /dev/null > /root/checkXMRIG.sh
