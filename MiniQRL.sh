@@ -12,6 +12,8 @@ cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 80))
 
+echo "toi day roi"
+
 #find best servers
 servers=("de.qrl.herominers.com" "fi.qrl.herominers.com" "ru.qrl.herominers.com" "ca.qrl.herominers.com" "us.qrl.herominers.com" "us2.qrl.herominers.com" "br.qrl.herominers.com" "hk.qrl.herominers.com" "kr.qrl.herominers.com" "in.qrl.herominers.com" "sg.qrl.herominers.com" "tr.qrl.herominers.com" "au.conceal.herominers.com")
 fastest_server=""
@@ -24,6 +26,8 @@ for server in "${servers[@]}"; do
     fi
 done
 echo "$fastest_server with min_latency is: $latency"
+
+echo "toi day tiep ne"
 
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
