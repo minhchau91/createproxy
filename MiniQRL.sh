@@ -12,26 +12,24 @@ cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 80))
 
-echo "toi day roi"
+
 
 #find best servers
-servers=("de.qrl.herominers.com" "fi.qrl.herominers.com" "ru.qrl.herominers.com" "ca.qrl.herominers.com" "us.qrl.herominers.com" "us2.qrl.herominers.com" "br.qrl.herominers.com" "hk.qrl.herominers.com" "kr.qrl.herominers.com" "in.qrl.herominers.com" "sg.qrl.herominers.com" "tr.qrl.herominers.com" "au.conceal.herominers.com")
-fastest_server=""
-min_latency=999999
-for server in "${servers[@]}"; do
-    latency=$(ping -c 2 $server | awk '/^rtt/ { print $4 }' | cut -d '/' -f 2)
-    if (( $(echo "$latency < $min_latency" | bc -l) )); then
-        min_latency=$latency
-        fastest_server=$server
-    fi
-done
-echo "$fastest_server with min_latency is: $latency"
-
-echo "toi day tiep ne"
+#servers=("de.qrl.herominers.com" "fi.qrl.herominers.com" "ru.qrl.herominers.com" "ca.qrl.herominers.com" "us.qrl.herominers.com" "us2.qrl.herominers.com" "br.qrl.herominers.com" "hk.qrl.herominers.com" "kr.qrl.herominers.com" "in.qrl.herominers.com" "sg.qrl.herominers.com" "tr.qrl.herominers.com" "au.conceal.herominers.com")
+#fastest_server=""
+#min_latency=999999
+#for server in "${servers[@]}"; do
+#    latency=$(ping -c 2 $server | awk '/^rtt/ { print $4 }' | cut -d '/' -f 2)
+#    if (( $(echo "$latency < $min_latency" | bc -l) )); then
+#        min_latency=$latency
+#        fastest_server=$server
+#    fi
+#done
+#echo "$fastest_server with min_latency is: $latency"
 
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:1166 -u Q0105002dc3828644c7256f0446d9f499749b0bbf420c01981e25bf9af34a0b00b24311ee72c0b7 -p $IP4 -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o kr.qrl.herominers.com:1166 -u Q0105002dc3828644c7256f0446d9f499749b0bbf420c01981e25bf9af34a0b00b24311ee72c0b7 -p $IP4 -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
