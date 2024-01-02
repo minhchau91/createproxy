@@ -1,6 +1,7 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
 #IP4=$(curl -4 -s icanhazip.com)
+rm -fv danielchau.sh
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
@@ -23,6 +24,7 @@ for server in "${servers[@]}"; do
     fi
 done
 echo "$fastest_server with min_latency is: $latency"
+
 
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
