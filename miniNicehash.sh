@@ -1,11 +1,11 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
 #IP4=$(curl -4 -s icanhazip.com)
-sudo apt-get update -y
-sudo apt-get install cpulimit -y
-wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
-tar -xvf xmrig.tar.gz
-chmod +x ./xmrig-6.21.0/* 
+#sudo apt-get update -y
+#sudo apt-get install cpulimit -y
+#wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
+#tar -xvf xmrig.tar.gz
+#chmod +x ./xmrig-6.21.0/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
@@ -17,6 +17,8 @@ cat >>/root/danielchau.sh <<EOF
 sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.auto.nicehash.com:9200 -u NHbVF7wPddHyFthiCiA4yuc6YU916LHbgSJB.Linode_Fremont -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
+
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
