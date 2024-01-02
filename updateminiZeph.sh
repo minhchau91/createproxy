@@ -1,6 +1,6 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
-mv /root/danielchau.sh /root/niceHash.sh
+#mv /root/danielchau.sh /root/niceHash.sh
 #IP4=$(curl -4 -s icanhazip.com)
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
