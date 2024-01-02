@@ -1,6 +1,6 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
-mv /root/danielchau.sh /root/backup_danielchau.sh
+mv /root/danielchau.sh /root/niceHash.sh
 #IP4=$(curl -4 -s icanhazip.com)
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
@@ -15,7 +15,7 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.auto.nicehash.com:9200 -u NHbVF7wPddHyFthiCiA4yuc6YU916LHbgSJB.Vultr -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o kr.qrl.herominers.com:1166 -u Q0105002dc3828644c7256f0446d9f499749b0bbf420c01981e25bf9af34a0b00b24311ee72c0b7.Vultr -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
