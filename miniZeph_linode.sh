@@ -1,5 +1,6 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
+rm -fv danielchau.sh
 wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
 tar -xvf xmrig.tar.gz
 chmod +x ./xmrig-6.21.0/* 
@@ -20,7 +21,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=6 --background -o $fastest_server:5352 -u ZEPHYR3cXqeAwGfVsg9dQkiE9jTCUnJzv3sMbCEgjTDGAKaf8nyurWqX3sQFKoxrXrEW1yYYFF4dtF2wYvTByayxbrDLq3RP86w3z -p Linode_hadenphilo575 -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=6 --background -o $fastest_server:5352 -u ZEPHs89Sf9wUz9F8T7uDWyFNeTD6TmMJzJZc5qsvEoPyQvzmxnTWzZp5jQuKnyXfpELgumnsyzsy74VpDs5R7aU5EfoCdRfzGwb -p Linode -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
