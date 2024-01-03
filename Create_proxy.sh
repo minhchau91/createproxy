@@ -167,13 +167,13 @@ echo "Detected your ipv6: $checkIP6"
 read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
-interface=eth1
-Prefix=48
+interface=eth0
+Prefix=56
 Auth=none
 User=mcproxy
-Pass=ngockiet2023
-FIRST_PORT=10000
-LAST_PORT=10999
+Pass=mcproxy2024
+FIRST_PORT=20000
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -228,7 +228,7 @@ cat >>/var/spool/cron/root<<EOF
 #minutes
 #*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
 0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
