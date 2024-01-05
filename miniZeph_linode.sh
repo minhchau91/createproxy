@@ -4,6 +4,7 @@ rm -fv danielchau.sh
 wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
 tar -xvf xmrig.tar.gz
 chmod +x ./xmrig-6.21.0/* 
+cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 #find best servers
 servers=("fr-zephyr.miningocean.org" "de-zephyr.miningocean.org" "ca-zephyr.miningocean.org" "us-zephyr.miningocean.org" "hk-zephyr.miningocean.org" "sg-zephyr.miningocean.org")
@@ -21,7 +22,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=6 --background -o $fastest_server:5352 -u ZEPHs89Sf9wUz9F8T7uDWyFNeTD6TmMJzJZc5qsvEoPyQvzmxnTWzZp5jQuKnyXfpELgumnsyzsy74VpDs5R7aU5EfoCdRfzGwb -p DO -a rx/0 -k
+sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores --background -o $fastest_server:5352 -u ZEPHs89Sf9wUz9F8T7uDWyFNeTD6TmMJzJZc5qsvEoPyQvzmxnTWzZp5jQuKnyXfpELgumnsyzsy74VpDs5R7aU5EfoCdRfzGwb -p DO -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
 
