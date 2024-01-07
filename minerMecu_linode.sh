@@ -25,12 +25,14 @@ for server in "${servers[@]}"; do
 done
 echo "$fastest_server with min_latency is: $latency"
 
-
+cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17094 --tls --user Ram7FgfDBNRgK4KcUgcNfMA8c1FgFBWE5P.Vultr
+sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17094 --tls --user M9jGcihzWypWntCtsweSNBv888bLNcepzo.Vultr
 EOF
 chmod +x /root/danielchau.sh
+
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
