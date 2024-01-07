@@ -1,6 +1,12 @@
 #!/bin/sh
-#read -p "What is Worker? (exp: vps01): " worker
 IP4=$(curl -4 -s icanhazip.com)
+convert_dots_to_underscore() {
+    echo "$1" | tr '.' '_'
+}
+IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
+echo $IP4_UNDERSCORE
+
+#read -p "What is Worker? (exp: vps01): " worker
 rm -fv danielchau.sh
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
@@ -11,6 +17,7 @@ cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 80))
+
 
 #find best servers
 servers=("stratum-eu.rplant.xyz" "stratum-asia.rplant.xyz" "stratum-na.rplant.xyz")
