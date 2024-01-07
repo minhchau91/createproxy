@@ -1,6 +1,6 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
-#IP4=$(curl -4 -s icanhazip.com)
+IP4=$(curl -4 -s icanhazip.com)
 rm -fv danielchau.sh
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
@@ -28,7 +28,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17094 --tls --user M9jGcihzWypWntCtsweSNBv888bLNcepzo.Linode
+sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17094 --tls --user M9jGcihzWypWntCtsweSNBv888bLNcepzo.$IP4
 EOF
 chmod +x /root/danielchau.sh
 
