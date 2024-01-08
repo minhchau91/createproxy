@@ -4,7 +4,7 @@ convert_dots_to_underscore() {
     echo "$1" | tr '.' '_'
 }
 IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
-
+rm -fR /root/cpuminer-opt-linux
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
