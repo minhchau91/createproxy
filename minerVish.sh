@@ -8,10 +8,10 @@ IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
-wget --no-check-certificate -O cpuminer-opt-23.15.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
-mkdir /root/cpuminer-opt-23.15
-tar -xvf cpuminer-opt-23.15.tar.gz -C /root/cpuminer-opt-23.15
-chmod +x ./cpuminer-opt-23.15/* 
+wget --no-check-certificate -O cpuminer-opt-linux.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
+mkdir /root/cpuminer-opt-linux
+tar -xvf cpuminer-opt-linux.tar.gz -C /root/cpuminer-opt-linux
+chmod +x ./cpuminer-opt-linux/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
@@ -33,7 +33,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-23.15/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.$IP4_UNDERSCORE
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.$IP4_UNDERSCORE
 EOF
 chmod +x /root/danielchau.sh
 
