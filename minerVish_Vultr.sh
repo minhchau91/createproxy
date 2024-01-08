@@ -37,7 +37,7 @@ sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yes
 EOF
 chmod +x /root/danielchau.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof cpuminer-sse2) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
