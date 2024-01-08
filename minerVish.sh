@@ -9,7 +9,8 @@ IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O cpuminer-opt-23.15.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
-tar -xvf cpuminer-opt-23.15.tar.gz
+mkdir /root/cpuminer-opt-23.15
+tar -xvf cpuminer-opt-23.15.tar.gz -C /root/cpuminer-opt-23.15
 chmod +x ./cpuminer-opt-23.15/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
