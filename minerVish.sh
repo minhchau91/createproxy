@@ -42,11 +42,11 @@ chmod +x /root/danielchau.sh
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
 #!/bin/bash
-if pgrep xmrig >/dev/null
+if pgrep cpuminer-sse2 >/dev/null
 then
-  echo "xmrig is running."
+  echo "cpuminer-sse2 is running."
 else
-  echo "xmrig isn't running"
+  echo "cpuminer-sse2 isn't running"
   bash kill_miniZeph.sh
   bash danielchau.sh
 fi
