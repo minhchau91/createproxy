@@ -33,7 +33,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Vultr_$IP4_UNDERSCORE
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Vultr_$IP4
 EOF
 chmod +x /root/danielchau.sh
 
@@ -78,7 +78,6 @@ chmod +x /root/checkXMRIG.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
-@reboot /root/danielchau.sh
 */10 * * * * /root/checkXMRIG.sh > /root/checkxmrig.log
 EOF
 
