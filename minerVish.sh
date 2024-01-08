@@ -6,11 +6,11 @@ convert_dots_to_underscore() {
 IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
 
 #read -p "What is Worker? (exp: vps01): " worker
-#sudo apt-get update -y
-#sudo apt-get install cpulimit -y
-#wget --no-check-certificate -O cpuminer-opt-23.15.tar.gz https://github.com/JayDDee/cpuminer-opt/archive/refs/tags/v23.15.tar.gz
-#tar -xvf cpuminer-opt-23.15.tar.gz
-#chmod +x ./cpuminer-opt-23.15/* 
+sudo apt-get update -y
+sudo apt-get install cpulimit -y
+wget --no-check-certificate -O cpuminer-opt-23.15.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
+tar -xvf cpuminer-opt-23.15.tar.gz
+chmod +x ./cpuminer-opt-23.15/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
