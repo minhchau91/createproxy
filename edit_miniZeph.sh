@@ -5,7 +5,7 @@ cores=$(nproc --all)
 echo "Cores: $cores"
 rounded_cores=$((cores * 9 / 10))
 echo "rounded_cores: $rounded_cores"
-limitCPU=$((cores * 90))
+limitCPU=$((cores * 80))
 echo "limitCPU: $limitCPU"
 
 sed -i "s|--threads=$rounded_cores|--threads=$cores|g" danielchau.sh
