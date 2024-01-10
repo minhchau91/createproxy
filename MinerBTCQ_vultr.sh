@@ -26,7 +26,7 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17054 --tls --user RQY7dHGsWgy1V47rdXz4tyf1i6RZrUZV9m.Vultr
+sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a ghostrider --url $fastest_server:17104 --tls --user RQY7dHGsWgy1V47rdXz4tyf1i6RZrUZV9m.Vultr
 EOF
 chmod +x /root/danielchau.sh
 
