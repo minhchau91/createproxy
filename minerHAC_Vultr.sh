@@ -20,7 +20,7 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/HAC/gpupool_miner_worker_2023_09_13_04_ubuntu16.04
+sudo /root/HAC/gpupool_miner_worker_2023_09_13_04_ubuntu16.04 > /dev/null 2>&1 &
 EOF
 chmod +x /root/danielchau.sh
 
