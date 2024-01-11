@@ -10,7 +10,7 @@ sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O HAC.zip https://www.hacash.diamonds/pool/gpu.zip
 mkdir /root/HAC
-unzip -xvf HAC.zip -C /root/HAC
+unzip -o HAC.zip -d HAC
 chmod +x ./HAC/* 
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
