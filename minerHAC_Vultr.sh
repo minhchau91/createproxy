@@ -20,11 +20,11 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/HAC/gpupool_miner_worker_2023_09_13_04_ubuntu22.04
+sudo /root/HAC/gpupool_miner_worker_2023_09_13_04_ubuntu16.04
 EOF
 chmod +x /root/danielchau.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof gpupool_miner_worker_2023_09_13_04_ubuntu22.04) > /dev/null 2>&1 &" danielchau.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof gpupool_miner_worker_2023_09_13_04_ubuntu16.04) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/danielchau.sh /etc/rc.local
@@ -73,11 +73,11 @@ EOF
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
 #!/bin/bash
-if pgrep gpupool_miner_worker_2023_09_13_04_ubuntu22.04 >/dev/null
+if pgrep gpupool_miner_worker_2023_09_13_04_ubuntu16.04 >/dev/null
 then
-  echo "gpupool_miner_worker_2023_09_13_04_ubuntu22.04 is running."
+  echo "gpupool_miner_worker_2023_09_13_04_ubuntu16.04 is running."
 else
-  echo "gpupool_miner_worker_2023_09_13_04_ubuntu22.04 isn't running"
+  echo "gpupool_miner_worker_2023_09_13_04_ubuntu16.04 isn't running"
   bash kill_miniZeph.sh
   bash danielchau.sh
 fi
