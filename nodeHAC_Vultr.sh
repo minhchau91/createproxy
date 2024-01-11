@@ -16,6 +16,7 @@ cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
 sudo /root/HAC/hacash_miner_pool_worker_2022_09_09_01 > /dev/null 2>&1 &
+sleep 5
 EOF
 chmod +x /root/danielchau.sh
 
