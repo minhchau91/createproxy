@@ -7,7 +7,8 @@ IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
 rm -fR /root/HAC
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
-sudo apt-get install cpulimit -y
+sudo apt-get install cpulimit
+sudo apt install ocl-icd-opencl-dev -y
 wget --no-check-certificate -O HAC.zip https://www.hacash.diamonds/pool/gpu.zip
 mkdir /root/HAC
 unzip -o HAC.zip -d HAC
