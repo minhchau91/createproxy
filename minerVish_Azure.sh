@@ -20,7 +20,7 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://stratum-eu.rplant.xyz:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=13 -a yespower -o stratum+tcps://stratum-eu.rplant.xyz:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure
 EOF
 chmod +x /root/danielchau.sh
 
