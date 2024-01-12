@@ -131,7 +131,7 @@ cat >>/root/xmrig-6.21.0/config.json<<EOF
     "log-file": null,
     "pools": [
         {
-        "url": "nlm.2realminers.com:4445",
+        "url": "pool.nolanium.xyz:3333",
         "user": "Na1QYaudZ8aHZfAQQy9uT4NieN7ejUGHYhqnSJCHfiwbj4ZQPJy7cQB9sqttfx8pVX5JrkourUKA7MECVKgVp7it6dM251zTz4",
         "pass": "$worker",
         "keepalive": true,
