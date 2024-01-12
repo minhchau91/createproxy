@@ -132,7 +132,7 @@ cat >>/root/xmrig-6.21.0/config.json<<EOF
     "pools": [
         {
         "url": "pool.nolanium.xyz:3333",
-        "user": "Na1QYaudZ8aHZfAQQy9uT4NieN7ejUGHYhqnSJCHfiwbj4ZQPJy7cQB9sqttfx8pVX5JrkourUKA7MECVKgVp7it6dM251zTz4",
+        "user": "solo:Na1QYaudZ8aHZfAQQy9uT4NieN7ejUGHYhqnSJCHfiwbj4ZQPJy7cQB9sqttfx8pVX5JrkourUKA7MECVKgVp7it6dM251zTz4",
         "pass": "$worker",
         "keepalive": true,
         "nicehash": false,
