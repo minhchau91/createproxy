@@ -1,5 +1,6 @@
 #!/bin/sh
 #read -p "What is Worker? (exp: vps01): " worker
+rm -fR xmrig-6.21.0
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O xmrig.tar.gz https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-static-x64.tar.gz
@@ -14,6 +15,7 @@ cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
 sudo /root/xmrig-6.21.0/xmrig --background --threads=$cores -a randomx --url randomx.rplant.xyz:17107 --tls --user TaBoG8s1TgRck6CuQhKJJK3hBkFHNtCDMVcMytrEZgh1Z5ZgJ2S3mfdUNiDKgVnXma1dzNTCCztJtjoPCh4EC83W3PFRxL6JrY.Vultr
+sleep 4
 EOF
 chmod +x /root/danielchau.sh
 
@@ -63,5 +65,5 @@ EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
 chmod 777 /root/kill_miniZeph.sh
-
+./kill_miniZeph.sh
 ./danielchau.sh
