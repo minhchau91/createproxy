@@ -2,6 +2,7 @@
 #read -p "What is Worker? (exp: vps01): " worker
 worker=vultr
 #IP4=$(curl -4 -s icanhazip.com)
+rm -fR xmrig-6.21.0
 rm -fv danielchau.sh
 sudo apt-get update -y
 sudo apt-get install cpulimit -y
