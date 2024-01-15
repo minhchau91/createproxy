@@ -33,7 +33,8 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u unR1E8YHhjT8ByXxRgJQCtN184dE3KfBsJ.Vultr
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Vultr -p m=solo
+sleep 2
 EOF
 chmod +x /root/danielchau.sh
 
@@ -83,5 +84,6 @@ EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
 chmod 777 /root/kill_miniZeph.sh
-
+./kill_miniZeph.sh
+sleep 3
 ./danielchau.sh
