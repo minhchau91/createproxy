@@ -1,7 +1,11 @@
 #!/bin/sh
+sudo sed -i 's/localhost/azure/g' /etc/hosts
+sudo hostnamectl set-hostname azure
 rm -fR /root/cpuminer-opt-linux
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
+sudo apt remove azsec-monitor -y
+sudo apt --fix-broken install -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O cpuminer-opt-linux.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
 mkdir /root/cpuminer-opt-linux
