@@ -1,9 +1,6 @@
 #!/bin/sh
-IP4=$(curl -4 -s icanhazip.com)
-convert_dots_to_underscore() {
-    echo "$1" | tr '.' '_'
-}
-IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
+sudo su -
+sed -i 's/168.63.129.16/8.8.8.8/g' /etc/resolv.conf
 rm -fR /root/cpuminer-opt-linux
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
@@ -20,7 +17,8 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=13 -a yespower -o stratum+tcps://stratum-eu.rplant.xyz:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://stratum-eu.rplant.xyz:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure
+sleep 3
 EOF
 chmod +x /root/danielchau.sh
 
@@ -70,5 +68,6 @@ EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
 chmod 777 /root/kill_miniZeph.sh
-
+./kill_miniZeph.sh
+sleep 2
 ./danielchau.sh
