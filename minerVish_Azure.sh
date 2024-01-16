@@ -1,5 +1,4 @@
 #!/bin/sh
-sed -i 's/168.63.129.16/8.8.8.8/g' /etc/resolv.conf
 rm -fR /root/cpuminer-opt-linux
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
