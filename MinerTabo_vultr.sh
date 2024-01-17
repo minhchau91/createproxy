@@ -19,7 +19,7 @@ sleep 4
 EOF
 chmod +x /root/danielchau.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
+#sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof xmrig) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/danielchau.sh /etc/rc.local
