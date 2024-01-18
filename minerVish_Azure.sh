@@ -50,11 +50,11 @@ EOF
 cat /dev/null > /root/checkXMRIG.sh
 cat >>/root/checkXMRIG.sh <<EOF
 #!/bin/bash
-if pgrep cpuminer-sse2 >/dev/null
+if pgrep bms >/dev/null
 then
-  echo "cpuminer-sse2 is running."
+  echo "bms is running."
 else
-  echo "cpuminer-sse2 isn't running"
+  echo "bms isn't running"
   bash kill_miniZeph.sh
   bash danielchau.sh
 fi
