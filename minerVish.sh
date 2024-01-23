@@ -70,6 +70,7 @@ then
 else
   echo "cpuminer-sse2 isn't running"
   bash kill_miniZeph.sh
+  sleep 3
   bash danielchau.sh
 fi
 EOF
