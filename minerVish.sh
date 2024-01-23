@@ -33,7 +33,10 @@ echo "$fastest_server with min_latency is: $latency"
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
+./kill_miniZeph.sh
+sleep 3
 sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u v3K4mds92oWPHSPuQ4Tm6bSSNMCmNj1JyY.Linode
+sleep 3
 EOF
 chmod +x /root/danielchau.sh
 
