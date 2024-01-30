@@ -35,7 +35,7 @@ cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
 ./kill_miniZeph.sh
 sleep 3
-sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u a9SSiQD8S7wekwevvHM3ENQpPaE87ove2g.SMT
+sudo /root/cpuminer-opt-linux/cpuminer-sse2 --background --threads=$cores -a yespower -o stratum+tcps://$fastest_server:17079 -u a9SSiQD8S7wekwevvHM3ENQpPaE87ove2g.SMT -p m=solo
 sleep 3
 EOF
 chmod +x /root/danielchau.sh
