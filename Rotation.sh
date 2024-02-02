@@ -136,8 +136,8 @@ User=$(awk -F "|" '{print $3}' ${WORKDATA2})
 Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
-FIRST_PORT=40000
-LAST_PORT=40999
+FIRST_PORT=10000
+LAST_PORT=10999
 
 echo "Internal ip = ${IP4}. Exteranl subnet for ip6 = ${IP6}::/${Prefix}"
 
