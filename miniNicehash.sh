@@ -14,6 +14,8 @@ limitCPU=$((cores * 80))
 cat /dev/null > /root/danielchau.sh
 cat >>/root/danielchau.sh <<EOF
 #!/bin/bash
+./kill_miner.sh
+sleep 3
 sudo /root/xmrig-6.21.0/xmrig --threads=$cores --background -o randomxmonero.auto.nicehash.com:9200 -u NHbVF7wPddHyFthiCiA4yuc6YU916LHbgSJB.Linode -a rx/0 -k
 EOF
 chmod +x /root/danielchau.sh
@@ -41,5 +43,6 @@ EOF
 
 wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/kill_miniZeph.sh" --output-document=/root/kill_miniZeph.sh
 chmod 777 /root/kill_miniZeph.sh
-
+./kill_miner.sh
+sleep 3
 ./danielchau.sh
