@@ -170,10 +170,10 @@ echo "Detected your active interface: $checkinterface"
 interface=eth0
 Prefix=56
 Auth=none
-User=mcproxy
-Pass=mcproxy2024
-FIRST_PORT=40000
-LAST_PORT=40999
+User=phamson
+Pass=phamsonproxy2024
+FIRST_PORT=30000
+LAST_PORT=30999
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -226,7 +226,7 @@ cat >>/var/spool/cron/root<<EOF
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
