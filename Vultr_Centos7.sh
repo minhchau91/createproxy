@@ -138,7 +138,7 @@ Pass=drt2024
 #read -p "Please input start port :" FIRST_PORT
 #read -p "Please input start port :" LAST_PORT
 FIRST_PORT=20000
-LAST_PORT=20061
+LAST_PORT=20112
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -195,6 +195,6 @@ gen_proxy_file_for_user
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #EOF
