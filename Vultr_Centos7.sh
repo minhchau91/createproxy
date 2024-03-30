@@ -195,6 +195,6 @@ gen_proxy_file_for_user
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #EOF
