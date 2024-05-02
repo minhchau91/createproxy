@@ -172,8 +172,8 @@ Prefix=48
 Auth=none
 User=krlive
 Pass=krlive2024
-FIRST_PORT=40000
-LAST_PORT=40999
+FIRST_PORT=20000
+LAST_PORT=20249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -226,7 +226,7 @@ cat >>/var/spool/cron/root<<EOF
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -237,6 +237,6 @@ cat >>/var/spool/cron/root<<EOF
 #0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
 #RebootNetwork
-#0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
+0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
 #0 */2 * * * /etc/rc2.local > /root/reboot3proxy.txt
 EOF
