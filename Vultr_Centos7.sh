@@ -186,7 +186,7 @@ gen_proxy_file_for_user
 #chmod 777 /root/Rotation.sh
 #cat >>/var/spool/cron/root<<EOF
 #day - time
-#0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 16 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 14 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -194,7 +194,7 @@ gen_proxy_file_for_user
 #*/30 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
-0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #EOF
