@@ -52,7 +52,7 @@ genIPV6() {
 				while grep -q $IPV6 "$filename"
 				do
 					echo "$IPV6" >> /root/duplicateipv6.txt
-					IPV6=$1:$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+					IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
 				done
 				echo "$IPV6" >> /root/$1.txt
 				echo "$IPV6"
