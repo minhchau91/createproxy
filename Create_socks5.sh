@@ -48,11 +48,11 @@ genIPV6() {
 				echo "$IPV6" >> /root/$1.txt
 				echo "$IPV6"
 			else
-				IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
 				while grep -q $IPV6 "$filename"
 				do
 					echo "$IPV6" >> /root/duplicateipv6.txt
-					IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+					IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
 				done
 				echo "$IPV6" >> /root/$1.txt
 				echo "$IPV6"
@@ -168,12 +168,12 @@ read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
 interface=eth1
-Prefix=48
+Prefix=32
 Auth=strong
-User=drt
-Pass=drt2024
+User=mrsong
+Pass=mrsong2024
 FIRST_PORT=20000
-LAST_PORT=20999
+LAST_PORT=21499
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -226,7 +226,7 @@ cat >>/var/spool/cron/root<<EOF
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-#*/10 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
