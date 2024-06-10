@@ -48,11 +48,11 @@ genIPV6() {
 				echo "$IPV6" >> /root/$1.txt
 				echo "$IPV6"
 			else
-				IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+				IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
 				while grep -q $IPV6 "$filename"
 				do
 					echo "$IPV6" >> /root/duplicateipv6.txt
-					IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
+					IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
 				done
 				echo "$IPV6" >> /root/$1.txt
 				echo "$IPV6"
@@ -137,7 +137,7 @@ Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
 FIRST_PORT=20000
-LAST_PORT=20999
+LAST_PORT=21499
 
 echo "Internal ip = ${IP4}. Exteranl subnet for ip6 = ${IP6}::/${Prefix}"
 
