@@ -177,7 +177,7 @@ chmod 777 /etc/rc.d/rc2.local
 bash /etc/rc.d/rc2.local
 
 
-#cat >>/var/spool/cron/root<<EOF
+cat >>/var/spool/cron/root<<EOF
 #day - time
 #0 16 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #59 21 * * * /root/Rotation.sh > /root/Rotation_log.txt
@@ -190,4 +190,4 @@ bash /etc/rc.d/rc2.local
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */12 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#EOF
+EOF
