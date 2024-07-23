@@ -153,6 +153,6 @@ EOF
 
 chmod +x /etc/rc.d/rc.local
 
-/bin/bash /etc/rc.d/rc.local
+sudo /bin/bash /etc/rc.d/rc.local
 
 echo "Rotation script completed."
