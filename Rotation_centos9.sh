@@ -1,15 +1,15 @@
 #!/bin/sh
 random() {
-	tr </dev/urandom -dc A-Za-z0-9 | head -c5
-	echo
+        tr </dev/urandom -dc A-Za-z0-9 | head -c5
+        echo
 }
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
 gen64() {
-	ip64() {
-		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-	}
-	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+        ip64() {
+                echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+        }
+        echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
 }
 install_3proxy() {
     echo "installing 3proxy"
@@ -51,7 +51,7 @@ nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
-stacksize 6291456 
+stacksize 6291456
 flush
 auth $Auth
 users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
@@ -87,7 +87,7 @@ gen_data() {
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "|" '{print "iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
+    $(awk -F "|" '{print "iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA})
 EOF
 }
 
@@ -118,6 +118,7 @@ echo "Internal ip = ${IP4}. External subnet for ip6 = ${IP6}::/${Prefix}"
 
 
 gen_data >$WORKDIR/data.txt
+echo "Generating ifconfig script..."
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x $WORKDIR/boot_*.sh
 
@@ -129,23 +130,29 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 
 
-cat /dev/null > /etc/rc.d/rc.local
+rm -fv /etc/rc.d/rc.local
+
 
 nmcli networking off
 nmcli networking on
 pid=$(pidof 3proxy)
-sudo /bin/kill $pid
+if [ -n "$pid" ]; then
+    sudo /bin/kill $pid
+fi
 
 
-/bin/cat >> /etc/rc.d/rc.local << EOF
+cat >>/etc/rc.d/rc.local <<EOF
 #!/bin/sh
-/bin/bash /home/proxy-installer/boot_ifconfig.sh
+/bin/touch /var/lock/subsys/local
+nmcli networking off
+nmcli networking on
+/bin/bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 
 chmod +x /etc/rc.d/rc.local
 
-bash /etc/rc.d/rc.local
+/bin/bash /etc/rc.d/rc.local
 
 echo "Rotation script completed."
