@@ -97,7 +97,7 @@ $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
-dnf install tar -y
+dnf install tar wget -y
 dnf clean all
 dnf install -y epel-release
 dnf install -y gcc net-tools bsdtar zip make
