@@ -155,7 +155,7 @@ chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 
 cat >>/etc/rc.d/rc.local <<EOF
-systemctl start NetworkManager.service
+nmcli networking off && nmcli networking on
 #/bin/pkill -f 'dhclient'
 ifup ${interface}
 bash ${WORKDIR}/boot_iptables.sh
@@ -172,14 +172,11 @@ shc -r -f /etc/centos.sh -o /root/Rotation.sh
 chmod 777 /root/Rotation.sh
 
 #Restart Network
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
-chmod 777 /etc/rc2.local
-bash /etc/rc2.local
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc.d/rc2.local
+chmod 777 /etc/rc.d/rc2.local
+bash /etc/rc.d/rc2.local
 
-gen_proxy_file_for_user
 
-#wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation.sh" --output-document=/root/Rotation.sh
-#chmod 777 /root/Rotation.sh
 #cat >>/var/spool/cron/root<<EOF
 #day - time
 #0 16 * * * /root/Rotation.sh > /root/Rotation_log.txt
