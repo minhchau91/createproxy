@@ -1,58 +1,42 @@
 #!/bin/sh
 random() {
-        tr </dev/urandom -dc A-Za-z0-9 | head -c5
-        echo
+	tr </dev/urandom -dc A-Za-z0-9 | head -c5
+	echo
 }
 
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
+gen64() {
+	ip64() {
+		echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
+	}
+	echo "$1:$(ip64):$(ip64):$(ip64):$(ip64)"
+}
+install_3proxy() {
+    echo "installing 3proxy"
+    mkdir -p /3proxy
+    cd /3proxy
+    URL="https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz"
+    wget -qO- $URL | tar -xzf-
+    cd 3proxy-0.9.3
+    make -f Makefile.Linux
+    mkdir -p /usr/local/etc/3proxy/{bin,logs,stat}
+    mv /3proxy/3proxy-0.9.3/bin/3proxy /usr/local/etc/3proxy/bin/
+    wget https://raw.githubusercontent.com/minhchau91/Proxy_ipv6/main/3proxy.service-Centos8 --output-document=/3proxy/3proxy-0.9.3/scripts/3proxy.service2
+    cp /3proxy/3proxy-0.9.3/scripts/3proxy.service2 /etc/systemd/system/3proxy.service
+    systemctl daemon-reload
+    systemctl enable 3proxy
+    echo "* hard nofile 999999" >> /etc/security/limits.conf
+    echo "* soft nofile 999999" >> /etc/security/limits.conf
+    echo "net.ipv6.conf.${interface}.proxy_ndp=1" >> /etc/sysctl.conf
+    echo "net.ipv6.conf.all.proxy_ndp=1" >> /etc/sysctl.conf
+    echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
+    echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
+    echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
+    sysctl -p
+    systemctl stop firewalld
+    systemctl disable firewalld
 
-genIPV6() {
-    filename=/root/$1.txt
-    [ -f /root/$1.txt ] || echo "" >> /root/$1.txt
-    ramdom4() {
-        echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-    }
-    ramdom2() {
-        echo "${array[$RANDOM % 16]}${array[$RANDOM % 16]}"
-    }
-    
-    if [[ $Prefix == "64" || $Prefix == "48" ]]; then
-        if [[ $Prefix == "64" ]]; then
-            IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            while grep -q $IPV6 "$filename"; do
-                echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            done
-            echo "$IPV6" >> /root/$1.txt
-            echo "$IPV6"
-        else
-            IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            while grep -q $IPV6 "$filename"; do
-                echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            done
-            echo "$IPV6" >> /root/$1.txt
-            echo "$IPV6"
-        fi
-    else
-        if [[ $Prefix == "56" ]]; then
-            IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            while grep -q $IPV6 "$filename"; do
-                echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1$(ramdom2):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            done
-            echo "$IPV6" >> /root/$1.txt
-            echo "$IPV6"
-        else
-            IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            while grep -q $IPV6 "$filename"; do
-                echo "$IPV6" >> /root/duplicateipv6.txt
-                IPV6=$1:$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4):$(ramdom4)
-            done
-            echo "$IPV6" >> /root/$1.txt
-            echo "$IPV6"
-        fi
-    fi
+    cd $WORKDIR
 }
 
 gen_3proxy() {
@@ -61,13 +45,13 @@ daemon
 maxconn 3000
 nserver 1.1.1.1
 nserver 1.0.0.1
-nserver 2001:4860:4860::8888
-nserver 2001:4860:4860::8844
+nserver 2606:4700:4700::64
+nserver 2606:4700:4700::6400
 nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
-stacksize 6291456
+stacksize 6291456 
 flush
 auth $Auth
 users $(awk -F "|" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
@@ -93,31 +77,29 @@ upload_proxy() {
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS1"
     echo "Download zip archive from: ${URL}"
     echo "Password: ${PASS1}"
-}
 
+}
 gen_data() {
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$User|$Pass|$Auth|$interface|$IP4|$port|$(genIPV6 $IP6)|$Prefix"
+        echo "$User|$Pass|$Auth|$interface|$IP4|$port|$(gen64 $IP6)|$Prefix"
     done
 }
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "|" '{print "/usr/sbin/iptables -I INPUT -p tcp --dport " $6 " -m state --state NEW -j ACCEPT"}' ${WORKDATA})
+    $(awk -F "|" '{print "iptables -I INPUT -p tcp --dport " $6 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
 EOF
 }
 
 gen_ifconfig() {
     cat <<EOF
-$(awk -F "|" '{print "/usr/sbin/ip -6 addr add " $7"/"$8 " dev " $4}' ${WORKDATA})
+$(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 
-echo "Rotation"
+echo "Rotation script started..."
 rm -fv /home/proxy-installer/data.txt
-rm -fv /home/proxy-installer/boot_iptables.sh
 rm -fv /home/proxy-installer/boot_ifconfig.sh
-rm -fv /home/proxy-installer/3proxy.cfg
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
@@ -134,30 +116,43 @@ FIRST_PORT=20000
 LAST_PORT=20249
 echo "Internal ip = ${IP4}. External subnet for ip6 = ${IP6}::/${Prefix}"
 
+
 gen_data >$WORKDIR/data.txt
+echo "Generating ifconfig script..."
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x $WORKDIR/boot_*.sh
 
+
 gen_3proxy >$WORKDIR/3proxy.cfg
+
 
 rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
-rm -fv /etc/rc.local
 
-/bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-systemctl restart NetworkManager
+
+rm -fv /etc/rc.d/rc.local
+
+
+nmcli networking off
+nmcli networking on
 pid=$(pidof 3proxy)
-sudo /bin/kill $pid
+if [ -n "$pid" ]; then
+    sudo /bin/kill $pid
+fi
 
-cat >>/etc/rc.local <<EOF
+
+cat >>/etc/rc.d/rc.local <<EOF
 #!/bin/sh
 touch /var/lock/subsys/local
-systemctl start NetworkManager.service
-/sbin/ifup ${interface}
+nmcli networking off
+nmcli networking on
 bash ${WORKDIR}/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 
-chmod +x /etc/rc.local
-bash /etc/rc.local
+chmod +x /etc/rc.d/rc.local
+
+bash /etc/rc.d/rc.local
+
+echo "Rotation script completed."
