@@ -118,7 +118,6 @@ echo "Internal ip = ${IP4}. External subnet for ip6 = ${IP6}::/${Prefix}"
 
 
 gen_data >$WORKDIR/data.txt
-echo "Generating ifconfig script..."
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x $WORKDIR/boot_*.sh
 
@@ -130,21 +129,17 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 
 
-rm -fv /etc/rc.d/rc.local
-
+cat /dev/null > /etc/rc.d/rc.local
 
 nmcli networking off
 nmcli networking on
 pid=$(pidof 3proxy)
-if [ -n "$pid" ]; then
-    sudo /bin/kill $pid
-fi
+sudo /bin/kill $pid
 
 
-cat >>/etc/rc.d/rc.local <<EOF
+/bin/cat >> /etc/rc.d/rc.local << EOF
 #!/bin/sh
-touch /var/lock/subsys/local
-bash ${WORKDIR}/boot_ifconfig.sh
+/bin/bash /home/proxy-installer/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
