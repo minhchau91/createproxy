@@ -180,9 +180,8 @@ rm -fv /usr/local/etc/3proxy/3proxy.cfg
 mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
 sudo /bin/cat /dev/null > /etc/rc.local
 
-sudo /bin/pkill -f '/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg'
-slepp 5
 sudo systemctl restart systemd-networkd
+
 pid=$(pidof 3proxy)
 sudo /bin/kill $pid
 
