@@ -187,7 +187,7 @@ sudo /bin/kill $pid
 
 sudo /bin/cat >>/etc/rc.local <<EOF
 systemctl start systemd-networkd.service
-sudo /bin/bash ${WORKDIR}/boot_ifconfig.sh
+sudo /bin/bash /home/proxy-installer/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
