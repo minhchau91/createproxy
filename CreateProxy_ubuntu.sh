@@ -240,7 +240,7 @@ cat >>/var/spool/cron/crontabs/root<<EOF
 #*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
+0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 1-23/2 * * * /root/Rotation.sh > /root/Rotation_log.txt
