@@ -186,7 +186,7 @@ Auth=none
 User=krlive
 Pass=krlive2024
 FIRST_PORT=20000
-LAST_PORT=20124
+LAST_PORT=20019
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -230,7 +230,7 @@ chmod 777 /root/changeipv6.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 crontab -r
-echo '* * * * * /root/IdlingCheck.sh > /dev/null 2>&1' | crontab -
+echo '0 0 * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
 
 #Add Cronjob
 #cat >>/var/spool/cron/crontabs/root<<EOF
