@@ -186,7 +186,7 @@ Auth=none
 User=krlive
 Pass=krlive2024
 FIRST_PORT=20000
-LAST_PORT=20019
+LAST_PORT=20499
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
