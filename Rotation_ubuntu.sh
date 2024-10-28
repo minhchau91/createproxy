@@ -185,6 +185,8 @@ sudo systemctl restart systemd-networkd
 pid=$(pidof 3proxy)
 sudo /bin/kill $pid
 
+sudo chmod +x /home/proxy-installer/boot_ifconfig.sh
+
 sudo /bin/cat >>/etc/rc.local <<EOF
 systemctl start systemd-networkd.service
 sudo /bin/bash /home/proxy-installer/boot_ifconfig.sh
