@@ -186,7 +186,7 @@ Auth=none
 User=phamson
 Pass=phamson2025
 FIRST_PORT=20000
-LAST_PORT=20249
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -230,7 +230,7 @@ chmod 777 /root/changeipv6.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 crontab -r
-#echo '*/2 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
+echo '*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
 
 #Add Cronjob
 #cat >>/var/spool/cron/crontabs/root<<EOF
