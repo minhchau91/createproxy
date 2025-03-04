@@ -334,7 +334,7 @@ def reload_3proxy_config():
         if usr1_code == 0:
             logging.info(f"Sent SIGUSR1 to 3proxy (PID: {pid}) to reload config")
             # Đợi một chút để 3proxy có thể reload
-            time.sleep(1)
+            #time.sleep(1)
             return True, f"Reloaded 3proxy configuration (PID: {pid})"
         else:
             logging.warning(f"Failed to send SIGUSR1: {usr1_err}")
@@ -352,7 +352,7 @@ def restart_3proxy():
         
         if restart_code == 0:
             logging.info("Restarted 3proxy service via systemctl")
-            time.sleep(2)  # Đợi để dịch vụ khởi động
+            #time.sleep(2)  # Đợi để dịch vụ khởi động
             
             # Kiểm tra xem dịch vụ đã chạy chưa
             _, status_err, status_code = run_command("systemctl is-active 3proxy")
@@ -370,7 +370,7 @@ def restart_3proxy():
         pid = get_3proxy_pid()
         if pid:
             run_command(f"kill {pid}")
-            time.sleep(1)
+            #time.sleep(1)
         
         # Khởi động 3proxy thủ công
         manual_cmd = "/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg"
@@ -381,7 +381,7 @@ def restart_3proxy():
             return False, f"Failed to start 3proxy: {manual_err}"
         
         # Kiểm tra xem 3proxy đã chạy chưa
-        time.sleep(2)
+        #time.sleep(2)
         pid = get_3proxy_pid()
         if pid:
             logging.info(f"Manually started 3proxy (PID: {pid})")
@@ -467,7 +467,7 @@ def generate_new_ipv6_for_port(port):
             return False, f"Không thể reload cấu hình 3proxy: {reload_msg}"
         
         # Chỉ xóa IPv6 cũ sau khi đã reload thành công
-        time.sleep(1)  # Đợi một chút để đảm bảo 3proxy đã sử dụng IPv6 mới
+        #time.sleep(1)  # Đợi một chút để đảm bảo 3proxy đã sử dụng IPv6 mới
         remove_ipv6_from_interface(interface, old_ipv6, Prefix)
         
         logging.info(f"Đã xoay thành công IPv6 cho port {port}")
