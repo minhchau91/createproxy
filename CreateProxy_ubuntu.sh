@@ -255,3 +255,18 @@ echo '*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
 #0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
 #0 */2 * * * /etc/rc2.local > /root/reboot3proxy.txt
 #EOF
+
+
+#setup api rotation by port
+apt-get update
+apt-get install -y python3 python3-pip
+pip3 install flask
+
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/ipv6_rotation_api.sh" --output-document=/etc/ipv6_rotation_api.sh
+shc -r -f /etc/ipv6_rotation_api.sh -o /root/ipv6_rotation_api.sh
+
+# Phân quyền và khởi động service
+chmod +x /root/ipv6_rotation_api.py
+systemctl daemon-reload
+systemctl enable ipv6rotation-api
+systemctl start ipv6rotation-api
