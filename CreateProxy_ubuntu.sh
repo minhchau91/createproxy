@@ -262,8 +262,25 @@ apt-get update
 apt-get install -y python3 python3-pip
 pip3 install flask
 
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/ipv6_rotation_api.sh" --output-document=/etc/ipv6_rotation_api.sh
-shc -r -f /etc/ipv6_rotation_api.sh -o /root/ipv6_rotation_api.sh
+wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/ipv6_rotation_api.py" --output-document=/root/ipv6_rotation_api.py
+
+# Tạo service để chạy API
+cat > /etc/systemd/system/ipv6rotation-api.service << EOF
+[Unit]
+Description=IPv6 Rotation API
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root
+ExecStart=/usr/bin/python3 /root/ipv6_rotation_api.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 
 # Phân quyền và khởi động service
 chmod +x /root/ipv6_rotation_api.py
