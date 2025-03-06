@@ -168,12 +168,12 @@ read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
 echo "Detected your active interface: $checkinterface"
 
 interface=eth1
-Prefix=32
-Auth=strong
-User=mrsong
-Pass=mrsong2024
+Prefix=56
+Auth=none
+User=drt
+Pass=drt2025
 FIRST_PORT=20000
-LAST_PORT=21499
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -217,6 +217,11 @@ wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/changeipv6.s
 shc -r -f /etc/changeipv6.sh -o /root/changeipv6.sh
 chmod 777 /root/changeipv6.sh
 
+
+cat /dev/null > /var/spool/cron/crontabs/root
+crontab -r
+echo '*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
+
 #Add Cronjob
 cat >>/var/spool/cron/root<<EOF
 #day
@@ -226,7 +231,7 @@ cat >>/var/spool/cron/root<<EOF
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+#*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */4 * * * /root/Rotation.sh > /root/Rotation_log.txt
