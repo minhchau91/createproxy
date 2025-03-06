@@ -186,7 +186,7 @@ Auth=none
 User=drt
 Pass=drt2025
 FIRST_PORT=20000
-LAST_PORT=20249
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
