@@ -17,11 +17,12 @@ else
 fi
 
 # Prompt user for type
-echo "Select server(s) to install:"
-echo "  1) SOCKS5 (Dante)"
-echo "  2) Shadowsocks-libev"
-echo "  3) Both SOCKS5 and Shadowsocks-libev"
-read -p "Enter choice [1, 2, or 3]: " choice
+#echo "Select server(s) to install:"
+#echo "  1) SOCKS5 (Dante)"
+#echo "  2) Shadowsocks-libev"
+#echo "  3) Both SOCKS5 and Shadowsocks-libev"
+#read -p "Enter choice [1, 2, or 3]: " choice
+choice = 2
 
 # Common variables
 EXT_IF=$(ip route | awk '/default/ {print $5; exit}')
