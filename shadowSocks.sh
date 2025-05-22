@@ -22,7 +22,7 @@ fi
 #echo "  2) Shadowsocks-libev"
 #echo "  3) Both SOCKS5 and Shadowsocks-libev"
 #read -p "Enter choice [1, 2, or 3]: " choice
-choice = 2
+#choice = 2
 
 # Common variables
 EXT_IF=$(ip route | awk '/default/ {print $5; exit}')
@@ -150,24 +150,26 @@ EOF
     qrencode -t ANSIUTF8 "${SS_URL}"
 }
 
-case "$choice" in
-    1)
-        install_socks5
-        ;;
-    2)
-        install_shadowsocks
-        ;;
-    3)
-        # Install both, capture outputs and display together
-        socks_info=$(install_socks5)
-        ss_output=$(install_shadowsocks)
-        echo "-- SOCKS5 --"
-        echo "$socks_info"
-        echo "-- Shadowsocks --"
-        echo "$ss_output"
-        ;;
-    *)
-        echo "❌ Invalid choice"
-        exit 1
-        ;;
-esac
+install_shadowsocks
+
+#case "$choice" in
+#    1)
+#        install_socks5
+#        ;;
+#    2)
+#        install_shadowsocks
+#        ;;
+#    3)
+#        # Install both, capture outputs and display together
+#        socks_info=$(install_socks5)
+#        ss_output=$(install_shadowsocks)
+#        echo "-- SOCKS5 --"
+#        echo "$socks_info"
+#        echo "-- Shadowsocks --"
+#        echo "$ss_output"
+#        ;;
+#    *)
+#        echo "❌ Invalid choice"
+#        exit 1
+#        ;;
+#esac
