@@ -144,8 +144,10 @@ EOF
     local SS_URL="ss://${SS_BASE64}"
     local INFO_LINE="${PUBLIC_IP}:${SERVER_PORT}:${METHOD}:${PASSWORD}"
 
+    touch /root/shadown.txt
     # Return multi-line: info + QR code
     echo "${INFO_LINE}"
+    echo "${INFO_LINE}" > /root/shadown.txt
     echo "QR Code:"
     qrencode -t ANSIUTF8 "${SS_URL}"
 }
