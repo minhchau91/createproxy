@@ -4,7 +4,7 @@ install_3proxy() {
     mkdir -p /3proxy
     cd /3proxy
     URL="https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz"
-    wget -qO- $URL | bsdtar -xvf-
+    wget -qO- $URL | tar -xzvf-
     cd 3proxy-0.9.3
     make -f Makefile.Linux
     mkdir -p /usr/local/etc/3proxy/{bin,logs,stat}
@@ -22,8 +22,8 @@ install_3proxy() {
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
     echo "net.ipv6.ip_nonlocal_bind = 1" >> /etc/sysctl.conf
     sysctl -p
-    systemctl stop firewalld
-    systemctl disable firewalld
+    systemctl stop ufw
+    systemctl disable ufw
 
     cd $WORKDIR
 }
