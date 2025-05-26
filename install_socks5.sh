@@ -58,16 +58,16 @@ systemctl enable danted
 
 
 # Gửi thông tin proxy tới API
-curl -s -X POST https://proxy.rrrb.xyz/api/proxy.php \
-    -H "Content-Type: application/json" \
-    -d '{
-        "ip": "'"$IP"'",
-        "port": "'"$PORT"'",
-        "username": "'"$USERNAME"'",
-        "password": "'"$PASSWORD"'",
-        "protocol": "socks",
-        "email": "'"$EMAIL"'"
-    }'
+#curl -s -X POST https://proxy.rrrb.xyz/api/proxy.php \
+#    -H "Content-Type: application/json" \
+#    -d '{
+#        "ip": "'"$IP"'",
+#        "port": "'"$PORT"'",
+#        "username": "'"$USERNAME"'",
+#        "password": "'"$PASSWORD"'",
+#        "protocol": "socks",
+#        "email": "'"$EMAIL"'"
+#    }'
 
-echo ""
+echo "$IP:$PORT:$USERNAME:$PASSWORD"
 echo -e "\e[32m✅ SOCKS5 proxy đã chạy thành công!\e[0m"
