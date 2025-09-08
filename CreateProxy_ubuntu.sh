@@ -183,10 +183,10 @@ fi
 echo "Detected your active interface: $checkinterface"
 
 Auth=none
-User=drt
-Pass=drt2025
+User=luongta
+Pass=luongta2025
 FIRST_PORT=20000
-LAST_PORT=20099
+LAST_PORT=20049
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -230,7 +230,7 @@ chmod 777 /root/changeipv6.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 crontab -r
-echo '*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
+#echo '*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
 
 #Add Cronjob
 #cat >>/var/spool/cron/crontabs/root<<EOF
