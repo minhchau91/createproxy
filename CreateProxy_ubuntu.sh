@@ -183,10 +183,10 @@ fi
 echo "Detected your active interface: $checkinterface"
 
 Auth=none
-User=luongta
-Pass=luongta2025
+User=hiepduong
+Pass=hiepduong2026
 FIRST_PORT=20000
-LAST_PORT=20049
+LAST_PORT=20099
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
