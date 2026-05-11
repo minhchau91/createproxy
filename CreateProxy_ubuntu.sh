@@ -183,10 +183,10 @@ fi
 echo "Detected your active interface: $checkinterface"
 
 Auth=none
-User=hiepduong
-Pass=hiepduong2026
+User=levanthanh
+Pass=thanhle2026
 FIRST_PORT=20000
-LAST_PORT=20099
+LAST_PORT=20249
 
 rm -fv $WORKDIR/ipv6-subnet.txt
 cat >>$WORKDIR/ipv6-subnet.txt <<EOF
@@ -241,7 +241,7 @@ crontab -r
 #59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
 #minutes
-#*/15 * * * * /root/Rotation.sh > /root/Rotation_log.txt
+*/20 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #hour
 #0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
 #0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
