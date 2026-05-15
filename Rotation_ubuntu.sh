@@ -166,8 +166,8 @@ User=$(awk -F "|" '{print $3}' ${WORKDATA2})
 Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
 interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
 Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
-FIRST_PORT=20000
-LAST_PORT=20249
+FIRST_PORT=FIRST_PORT
+LAST_PORT=LAST_PORT
 echo "Internal ip = ${IP4}. Exteranl subnet for ip6 = ${IP6}::/${Prefix}"
 
 gen_data >$WORKDIR/data.txt
