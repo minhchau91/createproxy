@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 random() {
 	tr </dev/urandom -dc A-Za-z0-9 | head -c5
 	echo
@@ -149,145 +149,50 @@ $(awk -F "|" '{print "ifconfig " $4 " inet6 add " $7"/"$8}' ${WORKDATA})
 EOF
 }
 
-sysctl -w net.ipv6.conf.eth0.accept_dad=0
-apt-get update -y
-apt-get install network-manager -y
-apt-get install net-tools wget -y
-apt-get install -y gcc net-tools zip make curl tar >/dev/null
-sudo apt-get -y install shc
-
-echo "installing apps"
-
+echo "Rotation"
+rm -fv /home/proxy-installer/data.txt
+rm -fv /home/proxy-installer/boot_iptables.sh
+rm -fv /home/proxy-installer/boot_ifconfig.sh
+rm -fv /home/proxy-installer/3proxy.cfg
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
-mkdir $WORKDIR && cd $_
+WORKDATA2="${WORKDIR}/ipv6-subnet.txt"
 
 IP4=$(curl -4 -s icanhazip.com)
-checkIP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-echo "Detected your ipv4: $IP4" 
-echo "Detected your ipv6: $checkIP6" 
-
-hostname=$(hostname)
-if [ "$hostname" = "vultr" ];
-then
-  IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
-  Prefix=64
-  interface=$(ip addr show | awk '/inet.*brd/{print $NF}')
-else
-  read -p "What is your ipv6 subnet? (exp: 2600:3c00:e002:6d00): " IP6
-  Prefix=56
-  interface=eth0
-fi
-
-echo "Detected your active interface: $checkinterface"
-
-Auth=none
-User=levanthanh
-Pass=thanhle2026
-FIRST_PORT=20000
-LAST_PORT=20249
-
-rm -fv $WORKDIR/ipv6-subnet.txt
-cat >>$WORKDIR/ipv6-subnet.txt <<EOF
-${IP6}|${Prefix}|${User}|${Pass}|${interface}|${Auth}
-EOF
-
-install_3proxy
-
-echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
+IP6=$(awk -F "|" '{print $1}' ${WORKDATA2})
+Prefix=$(awk -F "|" '{print $2}' ${WORKDATA2})
+User=$(awk -F "|" '{print $3}' ${WORKDATA2})
+Pass=$(awk -F "|" '{print $4}' ${WORKDATA2})
+interface=$(awk -F "|" '{print $5}' ${WORKDATA2})
+Auth=$(awk -F "|" '{print $6}' ${WORKDATA2})
+FIRST_PORT=FIRST_PORT
+LAST_PORT=LAST_PORT
+echo "Internal ip = ${IP4}. Exteranl subnet for ip6 = ${IP6}::/${Prefix}"
 
 gen_data >$WORKDIR/data.txt
-gen_iptables >$WORKDIR/boot_iptables.sh
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
-chmod +x $WORKDIR/boot_*.sh /etc/rc.local
+chmod +x $WORKDIR/boot_*.sh
 
-gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
+gen_3proxy >$WORKDIR/3proxy.cfg
 
-cat >>/etc/rc.local <<EOF
+rm -fv /usr/local/etc/3proxy/3proxy.cfg
+mv $WORKDIR/3proxy.cfg /usr/local/etc/3proxy/
+sudo /bin/cat /dev/null > /etc/rc.local
+
+sudo systemctl restart systemd-networkd
+
+pid=$(pidof 3proxy)
+sudo /bin/kill $pid
+
+sudo chmod +x /home/proxy-installer/boot_ifconfig.sh
+
+sudo /bin/cat >>/etc/rc.local <<EOF
 systemctl start systemd-networkd.service
-bash ${WORKDIR}/boot_iptables.sh
-bash ${WORKDIR}/boot_ifconfig.sh
+sudo /bin/bash /home/proxy-installer/boot_ifconfig.sh
 ulimit -n 65535
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 
-bash /etc/rc.local
-
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/Rotation_ubuntu.sh" --output-document=/etc/centos.sh
-if [ -f /etc/centos.sh ]; then
-    sed -i "s/FIRST_PORT=FIRST_PORT/FIRST_PORT=${FIRST_PORT}/g" /etc/centos.sh
-    sed -i "s/LAST_PORT=LAST_PORT/LAST_PORT=${LAST_PORT}/g" /etc/centos.sh
-fi
-shc -r -f /etc/centos.sh -o /root/Rotation.sh
-chmod 777 /root/Rotation.sh
-
-#Restart Network
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/rebootNetwork.sh" --output-document=/etc/rc2.local
-chmod 777 /etc/rc2.local
-bash /etc/rc2.local
-
-#Change IPv6 script
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/changeipv6.sh" --output-document=/etc/changeipv6.sh
-shc -r -f /etc/changeipv6.sh -o /root/changeipv6.sh
-chmod 777 /root/changeipv6.sh
-
-cat /dev/null > /var/spool/cron/crontabs/root
-crontab -r
-#echo '*/5 * * * * /root/Rotation.sh > /root/Rotation_log.txt' | crontab -
-
-#Add Cronjob
-#cat >>/var/spool/cron/crontabs/root<<EOF
-#day
-#00 11 */5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 13 */2 * * /root/Rotation.sh > /root/Rotation_log.txt
-#day - time
-#59 7 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 20 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#minutes
-*/20 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#hour
-#0 * * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */3 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */6 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 */2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 1-23/2 * * * /root/Rotation.sh > /root/Rotation_log.txt
-#Special date of month
-#0 12 3 * * /root/Rotation.sh > /root/Rotation_log.txt
-#0 0 5 * * /root/Rotation.sh > /root/Rotation_log.txt
-#RebootNetwork
-#0 * * * * /etc/rc2.local > /root/reboot3proxy.txt
-#0 */2 * * * /etc/rc2.local > /root/reboot3proxy.txt
-#EOF
-
-
-#setup api rotation by port
-apt-get update
-apt-get install -y python3 python3-pip
-pip3 install flask
-
-wget "https://raw.githubusercontent.com/minhchau91/createproxy/main/ipv6_rotation_api.py" --output-document=/root/ipv6_rotation_api.py
-
-# Tạo service để chạy API
-cat > /etc/systemd/system/ipv6rotation-api.service << EOF
-[Unit]
-Description=IPv6 Rotation API
-After=network.target
-
-[Service]
-User=root
-WorkingDirectory=/root
-ExecStart=/usr/bin/python3 /root/ipv6_rotation_api.py
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-
-# Phân quyền và khởi động service
-chmod +x /root/ipv6_rotation_api.py
-systemctl daemon-reload
-systemctl enable ipv6rotation-api
-systemctl start ipv6rotation-api
+chmod +x /etc/rc.local
+sudo /bin/bash /etc/rc.local
